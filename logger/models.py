@@ -25,6 +25,8 @@ class Trip(models.Model):
 
         trip_start_time = datetime.combine(self.day_log.start_date, self.trip_start_time)
         trip_end_time = datetime.combine(self.day_log.start_date, self.trip_finish_time)
+        if self.is_overnight:
+            trip_end_time += timedelta(days=1)
 
         trip_duration = trip_end_time - trip_start_time
         return int(trip_duration.total_seconds() // 60)
