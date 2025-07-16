@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta
 # Create your models here.
 
 
@@ -16,9 +17,17 @@ class DayLog(models.Model):
 # Model for individual trips
 class Trip(models.Model):
     day_log = models.ForeignKey(DayLog, on_delete=models.CASCADE, related_name='trips')
-    start_time = models.TimeField()
-    finish_time = models.TimeField()
+    trip_start_time = models.TimeField()
+    trip_finish_time = models.TimeField()
     is_overnight = models.BooleanField(default=False)
+
+    def trip_duration(self):
+
+        trip_start_time = datetime.combine(self.day_log.start_date, self.start_time)
+        trip_end_time = datetime.combine(self.day_log.start_date, self.finish_time)
+
+        trip_duration = trip_end_time
+        return int(trip_duration.total_seconds() // 60) - trip_start_time
 
 # adjusts how trips are shown in admin
     def __str__(self):
