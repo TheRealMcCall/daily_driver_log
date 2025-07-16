@@ -8,7 +8,7 @@ class DayLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date = models.DateField()
 
-# adjusts how DayLog objects are shown in admin
+# adjusts how DayLogs are shown in admin
     def __str__(self):
         return f"Created by User {self.user.username} - Day Log's Date = {self.start_date}"
 
@@ -19,3 +19,7 @@ class Trip(models.Model):
     start_time = models.TimeField()
     finish_time = models.TimeField()
     is_overnight = models.BooleanField(default=False)
+
+# adjusts how trips are shown in admin
+    def __str__(self):
+        return f" A Trip by User {self.day_log.user.username} on Date {self.day_log.start_date}, Start time: {self.start_time}, Finish time: {self.finish_time}"
