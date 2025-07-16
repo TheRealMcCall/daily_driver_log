@@ -10,14 +10,16 @@ class DayLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date = models.DateField()
 
+# To sum up the total minutes driven across trips for the day.
     def total_minutes_driven(self):
         return sum(trip.trip_duration() for trip in self.trips.all()
                    )
 
+# Sets daily limit allowed and returns true or false if limit is exceeded.
     def over_daily_limit(self, max_daily_minutes=600):
         return self.total_minutes_driven() > max_daily_minutes
 
-# adjusts how DayLogs are shown in admin
+# Adjusts how DayLogs are shown in admin.
     def __str__(self):
         return (
             f" Created by User {self.user.username}"
@@ -34,6 +36,7 @@ class Trip(models.Model):
     trip_finish_time = models.TimeField()
     is_overnight = models.BooleanField(default=False)
 
+# Validates that the fields are correct before saving
     def save(self, *args, **kwargs):
         trip_start_time = datetime.combine(self.day_log.start_date, self.trip_start_time)
         trip_end_time = datetime.combine(self.day_log.start_date, self.trip_finish_time)
@@ -45,8 +48,8 @@ class Trip(models.Model):
                 raise ValidationError("Finish time must be after start time for non-overnight trips.")
         super().save(*args, **kwargs)
 
+# Calculates the individual trip duration.
     def trip_duration(self):
-
         trip_start_time = datetime.combine(self.day_log.start_date, self.trip_start_time)
         trip_end_time = datetime.combine(self.day_log.start_date, self.trip_finish_time)
         if self.is_overnight:
@@ -55,6 +58,7 @@ class Trip(models.Model):
         trip_duration = trip_end_time - trip_start_time
         return int(trip_duration.total_seconds() // 60)
 
+# Sets trip limit allowed and returns true or false if limit is exceeded.
     def over_trip_limit(self, max_trip_minutes=330):
         return self.trip_duration() > max_trip_minutes
 
