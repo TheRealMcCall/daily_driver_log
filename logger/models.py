@@ -10,6 +10,10 @@ class DayLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date = models.DateField()
 
+    def total_minutes_driven(self):
+        return sum(trip.trip_duration() for trip in self.trips.all()
+                   )
+
 # adjusts how DayLogs are shown in admin
     def __str__(self):
         return f"Created by User {self.user.username} - Day Log's Date = {self.start_date}"
