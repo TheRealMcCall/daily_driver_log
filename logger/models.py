@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 
@@ -20,6 +21,17 @@ class Trip(models.Model):
     trip_start_time = models.TimeField()
     trip_finish_time = models.TimeField()
     is_overnight = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        trip_start_time = datetime.combine(self.day_log.start_date, self.trip_start_time)
+        trip_end_time = datetime.combine(self.day_log.start_date, self.trip_finish_time)
+        if self.is_overnight:
+            if trip_end_time <= trip_start_time:
+                trip_end_time += timedelta(days=1)
+        else:
+            if trip_end_time <= trip_start_time:
+                raise ValidationError("Finish time must be after start time for non-overnight trips.")
+        super().save(*args, **kwargs)
 
     def trip_duration(self):
 
