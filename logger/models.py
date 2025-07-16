@@ -8,10 +8,9 @@ class DayLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date = models.DateField()
 
-
 # adjusts how DayLog objects are shown in admin
-def __str__(self):
-    return f"{self.user.username} - {self.start_date}"
+    def __str__(self):
+        return f"Created by User {self.user.username} - Trip Log's Date = {self.start_date}"
 
 
 # Model for individual trips
