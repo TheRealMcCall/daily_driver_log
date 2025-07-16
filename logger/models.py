@@ -14,9 +14,17 @@ class DayLog(models.Model):
         return sum(trip.trip_duration() for trip in self.trips.all()
                    )
 
+    def over_daily_limit(self, max_daily_minutes=600):
+        return self.total_minutes_driven() > max_daily_minutes
+
 # adjusts how DayLogs are shown in admin
     def __str__(self):
-        return f"Created by User {self.user.username} - Day Log's Date = {self.start_date} - Total Minutes Driven = {self.total_minutes_driven()}"
+        return (
+            f" Created by User {self.user.username}"
+            f" Day Log's Date = {self.start_date}"
+            f" Total Minutes Driven = {self.total_minutes_driven()}"
+            f" Daily Limit Exceeded = {self.over_daily_limit()}"
+        )
 
 
 # Model for individual trips
@@ -47,10 +55,14 @@ class Trip(models.Model):
         trip_duration = trip_end_time - trip_start_time
         return int(trip_duration.total_seconds() // 60)
 
+    def over_trip_limit(self, max_trip_minutes=330):
+        return self.trip_duration() > max_trip_minutes
+
 # adjusts how trips are shown in admin
     def __str__(self):
         return (
             f" A Trip by User {self.day_log.user.username} on Date {self.day_log.start_date}, "
             f"Start time: {self.trip_start_time}, Finish time: {self.trip_finish_time},"
             f"Duration: {self.trip_duration()} minutes"
+            f" Trip limit exceeded = {self.over_trip_limit()}"
         )
