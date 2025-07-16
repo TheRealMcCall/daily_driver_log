@@ -23,12 +23,16 @@ class Trip(models.Model):
 
     def trip_duration(self):
 
-        trip_start_time = datetime.combine(self.day_log.start_date, self.start_time)
-        trip_end_time = datetime.combine(self.day_log.start_date, self.finish_time)
+        trip_start_time = datetime.combine(self.day_log.start_date, self.trip_start_time)
+        trip_end_time = datetime.combine(self.day_log.start_date, self.trip_finish_time)
 
-        trip_duration = trip_end_time
-        return int(trip_duration.total_seconds() // 60) - trip_start_time
+        trip_duration = trip_end_time - trip_start_time
+        return int(trip_duration.total_seconds() // 60)
 
 # adjusts how trips are shown in admin
     def __str__(self):
-        return f" A Trip by User {self.day_log.user.username} on Date {self.day_log.start_date}, Start time: {self.start_time}, Finish time: {self.finish_time}"
+        return (
+            f" A Trip by User {self.day_log.user.username} on Date {self.day_log.start_date}, "
+            f"Start time: {self.trip_start_time}, Finish time: {self.trip_finish_time},"
+            f"Duration: {self.trip_duration()} minutes"
+        )
