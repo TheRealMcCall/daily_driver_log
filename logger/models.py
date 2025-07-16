@@ -10,7 +10,7 @@ class DayLog(models.Model):
 
 # adjusts how DayLog objects are shown in admin
     def __str__(self):
-        return f"Created by User {self.user.username} - Trip Log's Date = {self.start_date}"
+        return f"Created by User {self.user.username} - Day Log's Date = {self.start_date}"
 
 
 # Model for individual trips
