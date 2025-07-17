@@ -1,0 +1,1 @@
+web: gunicorn daily_driver_log.wsgi
