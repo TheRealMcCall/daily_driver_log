@@ -19,4 +19,8 @@
 
 <p> Total time driven : {{ total_minutes }} minutes</p>
 
+<div>
+    <a href="{% url 'trip_form' daylog.id %}" class="btn btn-success">Create New Trip</a>
+</div>
+
 {% endblock %}
