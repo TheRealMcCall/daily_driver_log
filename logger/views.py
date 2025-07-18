@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import DayLog
-from .forms import TripForm
+from .forms import TripForm, DayLogForm
 
 # Create your views here.
 
@@ -16,6 +16,20 @@ def dashboard(request):
     return render(request, 'logger/dashboard.html', {
         'daylogs': user_daylogs,
     })
+
+
+def create_daylog(request):
+    if request.method == 'POST':
+        form = DayLogForm(request.POST)
+        if form.is_valid():
+            daylog = form.save(commit=False)
+            daylog.user = request.user
+            daylog.save()
+            return redirect('dashboard')
+    else:
+        form = DayLogForm()
+
+    return render(request, 'logger/create_daylog.html', {'form': form})
 
 
 def new_trip(request, daylog_id):
