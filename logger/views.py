@@ -5,3 +5,7 @@ from django.shortcuts import render
 
 def home(request):
     return render(request, 'logger/home.html')
+
+
+def dashboard(request):
+    return render(request, 'logger/dashboard.html')
