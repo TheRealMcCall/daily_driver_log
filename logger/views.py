@@ -9,3 +9,7 @@ def home(request):
 
 def dashboard(request):
     return render(request, 'logger/dashboard.html')
+
+
+def new_trip(request):
+    return render(request, 'logger/new_trip.html')
