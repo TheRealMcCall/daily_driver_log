@@ -13,3 +13,7 @@ def dashboard(request):
 
 def new_trip(request):
     return render(request, 'logger/new_trip.html')
+
+
+def day_summary(request):
+    return render(request, 'logger/day_summary.html')
