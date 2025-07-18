@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p>you are logged in {{ user.username }}</p>
+    <h2>Welcome {{ user.username }} Please find day logs below:-</h2>
+ {% if daylogs %}
+    <ul>
+      {% for log in daylogs %}
+        <li>
+          <strong>{{ log.start_date }}</strong> —
+          {{ log.total_minutes_driven }} minutes driven —
+          {% if log.over_daily_limit %}
+            <span style="color:red;">Over Limit!</span>
+          {% else %}
+            Within Limit
+          {% endif %}
+          —
+          <a href="{% url 'day_summary' log.id %}">View Summary</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No day logs yet.</p>
+  {% endif %}
+
 {% endblock %}

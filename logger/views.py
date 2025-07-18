@@ -9,7 +9,12 @@ def home(request):
 
 
 def dashboard(request):
-    return render(request, 'logger/dashboard.html')
+
+    user_daylogs = DayLog.objects.filter(user=request.user).order_by('-start_date')
+
+    return render(request, 'logger/dashboard.html', {
+        'daylogs': user_daylogs,
+    })
 
 
 def new_trip(request):
