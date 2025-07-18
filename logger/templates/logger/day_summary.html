@@ -6,21 +6,24 @@
 <ul>
     {% for trip in trips %}
         <li>
-        Start: {{ trip.trip_start_time }} |
-        End: {{ trip.trip_finish_time }} |
-        Duration: {{ trip.trip_duration }} minutes |
-        Limit Exceeded: {{ trip.over_trip_limit }}
+            Start: {{ trip.trip_start_time }} |
+            End: {{ trip.trip_finish_time }} |
+            Duration: {{ trip.trip_duration }} minutes |
+            Limit Exceeded: {{ trip.over_trip_limit }}
+
+            <a href="{% url 'edit_trip' daylog.id trip.id %}">Edit</a>
+            <a href="{% url 'delete_trip' daylog.id trip.id %}">Delete</a>
         </li>
     {% empty %}
         <li>No trips logged for this day.</li>
-</ul>
     {% endfor %}
+</ul>
+
 <h2>Further Info</h2>
 
-<p> Total time driven : {{ total_minutes }} minutes</p>
+<p>Total time driven: {{ total_minutes }} minutes</p>
 
 <div>
     <a href="{% url 'trip_form' daylog.id %}" class="btn btn-success">Create New Trip</a>
 </div>
-
 {% endblock %}

@@ -32,6 +32,13 @@ def create_daylog(request):
     return render(request, 'logger/create_daylog.html', {'form': form})
 
 
+def delete_trip(request, daylog_id, trip_id):
+    daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)
+    trip = get_object_or_404(Trip, id=trip_id, day_log=daylog)
+    trip.delete()
+    return redirect('day_summary', daylog_id=daylog.id)
+
+
 def trip_form(request, daylog_id, trip_id=None):
     daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)
 
