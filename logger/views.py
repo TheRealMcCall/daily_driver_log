@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import DayLog
+from .models import DayLog, Trip
 from .forms import TripForm, DayLogForm
 
 # Create your views here.
@@ -32,22 +32,28 @@ def create_daylog(request):
     return render(request, 'logger/create_daylog.html', {'form': form})
 
 
-def new_trip(request, daylog_id):
+def trip_form(request, daylog_id, trip_id=None):
     daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)
 
+    if trip_id:
+        trip = get_object_or_404(Trip, id=trip_id, day_log=daylog)
+    else:
+        trip = None
+
     if request.method == 'POST':
-        form = TripForm(request.POST)
+        form = TripForm(request.POST, instance=trip)
         if form.is_valid():
             trip = form.save(commit=False)
             trip.day_log = daylog
             trip.save()
             return redirect('day_summary', daylog_id=daylog.id)
     else:
-        form = TripForm()
+        form = TripForm(instance=trip)
 
-    return render(request, 'logger/new_trip.html', {
+    return render(request, 'logger/trip_form.html', {
         'form': form,
         'daylog': daylog,
+        'trip': trip,
     })
 
 
