@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p> day summary placeholder</p>
+<h2>Day Summary for {{ daylog.start_date }}</h2>
+<h3>Trips</h3>
+<ul>
+    {% for trip in trips %}
+        <li>
+        Start: {{ trip.trip_start_time }} |
+        End: {{ trip.trip_finish_time }} |
+        Duration: {{ trip.trip_duration }} minutes |
+        Limit Exceeded: {{ trip.over_trip_limit }}
+        </li>
+    {% empty %}
+        <li>No trips logged for this day.</li>
+</ul>
+    {% endfor %}
+<h2>Further Info</h2>
+
+<p> Total time driven : {{ total_minutes }} minutes</p>
+
 {% endblock %}
