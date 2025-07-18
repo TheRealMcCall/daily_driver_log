@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .import views
 
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     path('trip/delete/<int:daylog_id>/<int:trip_id>/', views.delete_trip, name='delete_trip'),
     path('summary/day/<int:daylog_id>/', views.day_summary, name='day_summary'),
     path('daylog/new/', views.create_daylog, name='create_daylog'),
+    path('accounts/', include('allauth.urls'))
 ]
