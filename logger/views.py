@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import DayLog, Trip
 from .forms import TripForm, DayLogForm
 
-# Create your views here.
 
 # To render the home page
 def home(request):
@@ -12,7 +11,11 @@ def home(request):
 # Displays all the daylogs for logged in user on the dashboard view
 def dashboard(request):
 
-    user_daylogs = DayLog.objects.filter(user=request.user).order_by('-start_date')
+    user_daylogs = (
+         DayLog.objects
+         .filter(user=request.user)
+         .order_by('-start_date')
+    )
 
     return render(request, 'logger/dashboard.html', {
         'daylogs': user_daylogs,
