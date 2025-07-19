@@ -39,6 +39,13 @@ def create_daylog(request):
     return render(request, 'logger/create_daylog.html', {'form': form})
 
 
+# View to delete a day log
+def delete_daylog(request, daylog_id):
+    log =get_object_or_404(DayLog, id=daylog_id, user=request.user)
+    log.delete()
+    return redirect('dashboard')
+
+
 # View to delete a specific trip
 def delete_trip(request, daylog_id, trip_id):
     daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)

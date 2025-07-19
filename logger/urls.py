@@ -51,6 +51,13 @@ urlpatterns = [
         name='create_daylog',
         ),
 
+    # Delete a day log
+    path(
+        'daylog/delete/<int:daylog_id>/',
+        views.delete_daylog,
+        name='delete_daylog',
+        ),
+
     # For Django user authentication
     path(
         'accounts/',
