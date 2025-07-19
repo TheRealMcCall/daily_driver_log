@@ -1,9 +1,10 @@
 from django import forms
 from .models import Trip, DayLog
 
-
+# Form to create or update a trip.
 class TripForm(forms.ModelForm):
     class Meta:
+        # Links this form to the Trip model.
         model = Trip
         fields = ['trip_start_time', 'trip_finish_time', 'is_overnight']
         widgets = {
@@ -12,9 +13,10 @@ class TripForm(forms.ModelForm):
             'is_overnight': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
 
-
+# Form to create a Daylog.
 class DayLogForm(forms.ModelForm):
     class Meta:
+        # Links this form to the DayLog model.
         model = DayLog
         fields = ['start_date']
         widgets = {
