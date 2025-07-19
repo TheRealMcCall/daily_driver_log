@@ -7,7 +7,7 @@
       {% for log in daylogs %}
         <li>
           <strong>{{ log.start_date }}</strong> —
-          {{ log.total_minutes_driven }} minutes driven —
+          {{ log.total_hours_and_minutes.0 }}h {{ log.total_hours_and_minutes.1 }}m driven —
           {% if log.over_daily_limit %}
             <span style="color:red;">Over Limit!</span>
           {% else %}

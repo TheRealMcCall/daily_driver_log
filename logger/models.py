@@ -15,6 +15,13 @@ class DayLog(models.Model):
         return sum(trip.trip_duration() for trip in self.trips.all()
                    )
 
+# Convert total minutes into hours and minutes
+    def total_hours_and_minutes(self):
+        total_minutes = self.total_minutes_driven()
+        hours = total_minutes // 60
+        minutes = total_minutes % 60
+        return hours, minutes
+
 # Sets daily limit allowed and returns true or false if limit is exceeded.
     def over_daily_limit(self, max_daily_minutes=600):
         return self.total_minutes_driven() > max_daily_minutes
