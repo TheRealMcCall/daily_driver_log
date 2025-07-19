@@ -31,27 +31,42 @@ class DayLog(models.Model):
 
 # Model for individual trips
 class Trip(models.Model):
-    day_log = models.ForeignKey(DayLog, on_delete=models.CASCADE, related_name='trips')
+    day_log = models.ForeignKey(
+        DayLog,
+        on_delete=models.CASCADE,
+        related_name='trips'
+    )
     trip_start_time = models.TimeField()
     trip_finish_time = models.TimeField()
     is_overnight = models.BooleanField(default=False)
 
 # Validates that the fields are correct before saving
     def save(self, *args, **kwargs):
-        trip_start_time = datetime.combine(self.day_log.start_date, self.trip_start_time)
-        trip_end_time = datetime.combine(self.day_log.start_date, self.trip_finish_time)
+        trip_start_time = datetime.combine(
+            self.day_log.start_date, self.trip_start_time
+            )
+        trip_end_time = datetime.combine(
+            self.day_log.start_date, self.trip_finish_time
+            )
+
         if self.is_overnight:
             if trip_end_time <= trip_start_time:
                 trip_end_time += timedelta(days=1)
         else:
             if trip_end_time <= trip_start_time:
-                raise ValidationError("Finish time must be after start time for non-overnight trips.")
+                raise ValidationError(
+                    "Finish time must be after start time.")
         super().save(*args, **kwargs)
 
 # Calculates the individual trip duration.
     def trip_duration(self):
-        trip_start_time = datetime.combine(self.day_log.start_date, self.trip_start_time)
-        trip_end_time = datetime.combine(self.day_log.start_date, self.trip_finish_time)
+        trip_start_time = datetime.combine(
+            self.day_log.start_date, self.trip_start_time
+            )
+        trip_end_time = datetime.combine(
+            self.day_log.start_date, self.trip_finish_time
+            )
+
         if self.is_overnight:
             trip_end_time += timedelta(days=1)
 
@@ -65,8 +80,10 @@ class Trip(models.Model):
 # adjusts how trips are shown in admin
     def __str__(self):
         return (
-            f" A Trip by User {self.day_log.user.username} on Date {self.day_log.start_date}, "
-            f"Start time: {self.trip_start_time}, Finish time: {self.trip_finish_time},"
-            f"Duration: {self.trip_duration()} minutes"
+            f"User {self.day_log.user.username}"
+            f" Date {self.day_log.start_date},"
+            f" Start time: {self.trip_start_time},"
+            f" Finish time: {self.trip_finish_time},"
+            f" Duration: {self.trip_duration()} minutes"
             f" Trip limit exceeded = {self.over_trip_limit()}"
         )
