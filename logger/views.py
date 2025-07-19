@@ -4,11 +4,12 @@ from .forms import TripForm, DayLogForm
 
 # Create your views here.
 
-
+# To render the home page
 def home(request):
     return render(request, 'logger/home.html')
 
 
+# Displays all the daylogs for logged in user on the dashboard view
 def dashboard(request):
 
     user_daylogs = DayLog.objects.filter(user=request.user).order_by('-start_date')
@@ -18,10 +19,13 @@ def dashboard(request):
     })
 
 
+# View to display and process the form for creating a new DayLog
 def create_daylog(request):
+
     if request.method == 'POST':
         form = DayLogForm(request.POST)
         if form.is_valid():
+            # Links DayLog to the current user before saving
             daylog = form.save(commit=False)
             daylog.user = request.user
             daylog.save()
@@ -32,6 +36,7 @@ def create_daylog(request):
     return render(request, 'logger/create_daylog.html', {'form': form})
 
 
+# View to delete a specific trip
 def delete_trip(request, daylog_id, trip_id):
     daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)
     trip = get_object_or_404(Trip, id=trip_id, day_log=daylog)
@@ -39,9 +44,11 @@ def delete_trip(request, daylog_id, trip_id):
     return redirect('day_summary', daylog_id=daylog.id)
 
 
+# View for creating and editing a trip
 def trip_form(request, daylog_id, trip_id=None):
     daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)
 
+    # If editing, below gets the specific trip.
     if trip_id:
         trip = get_object_or_404(Trip, id=trip_id, day_log=daylog)
     else:
@@ -50,6 +57,7 @@ def trip_form(request, daylog_id, trip_id=None):
     if request.method == 'POST':
         form = TripForm(request.POST, instance=trip)
         if form.is_valid():
+            # Link the trip to the daylog before saving.
             trip = form.save(commit=False)
             trip.day_log = daylog
             trip.save()
@@ -64,6 +72,7 @@ def trip_form(request, daylog_id, trip_id=None):
     })
 
 
+# View to show a summary of a specific DayLog and its related trips
 def day_summary(request, daylog_id):
 
     daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)
