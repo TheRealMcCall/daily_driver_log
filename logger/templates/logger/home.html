@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p>Welcome to Daily Driver Log</p>
-    <p><a href="{% url 'account_login' %}">Login</a></p>
-    <p><a href="{% url 'account_signup' %}">Register</a></p>
+<div class="container mt-4">
+  <div class="text-center">
+    <h1 class="mb-4">Welcome to Daily Driver Log</h1>
+    <p class="lead">
+      Track your driving time, monitor daily and trip limits, and keep organized logs with ease.
+    </p>
+    <p>
+      Whether you're a professional driver or simply want to maintain a clear log of your driving hours,
+      this tool helps ensure you're within safe and legal limits.
+    </p>
+    <div class="mt-4">
+      <a href="{% url 'account_login' %}" class="btn btn-primary me-2">Login</a>
+      <a href="{% url 'account_signup' %}" class="btn btn-outline-secondary">Register</a>
+    </div>
+  </div>
+</div>
 {% endblock %}
