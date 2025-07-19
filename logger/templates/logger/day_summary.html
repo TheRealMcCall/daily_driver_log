@@ -1,29 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Day Summary for {{ daylog.start_date }}</h2>
-<h3>Trips</h3>
-<ul>
-    {% for trip in trips %}
-        <li>
-            Start: {{ trip.trip_start_time }} |
-            End: {{ trip.trip_finish_time }} |
-            Duration: {{ trip.trip_duration }} minutes |
-            Limit Exceeded: {{ trip.over_trip_limit }}
+<div class="container mt-4">
+  <h2 class="text-center">Day Summary for {{ daylog.start_date }}</h2>
 
-            <a href="{% url 'edit_trip' daylog.id trip.id %}">Edit</a>
-            <a href="{% url 'delete_trip' daylog.id trip.id %}">Delete</a>
+  {% if trips %}
+    <ul class="list-group mb-4">
+      {% for trip in trips %}
+        <li class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+          <div>
+            <strong>Start:</strong> {{ trip.trip_start_time }} |
+            <strong>End:</strong> {{ trip.trip_finish_time }} |
+            <strong>Duration:</strong> {{ trip.total_hours_and_minutes.0 }}h {{ trip.total_hours_and_minutes.1 }}m |
+            <strong>Limit Exceeded:</strong>
+            {% if trip.over_trip_limit %}
+              <span class="text-danger">Yes</span>
+            {% else %}
+              No
+            {% endif %}
+          </div>
+          <div class="mt-2 mt-md-0">
+            <a href="{% url 'edit_trip' daylog.id trip.id %}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+            <a href="{% url 'delete_trip' daylog.id trip.id %}" class="btn btn-sm btn-outline-danger"
+               onclick="return confirm('Delete this trip?');">Delete</a>
+          </div>
         </li>
-    {% empty %}
-        <li>No trips logged for this day.</li>
-    {% endfor %}
-</ul>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No trips logged for this day.</p>
+  {% endif %}
 
-<h2>Further Info</h2>
+  <h4>Further Info</h4>
+  <p>Total time driven: {{ daylog.total_hours_and_minutes.0 }}h {{ daylog.total_hours_and_minutes.1 }}m</p>
+  {% if daylog.over_daily_limit %}
+    <p class="text-danger">Over Daily Limit</p>
+  {% else %}
+    <p>Within Daily Limit</p>
+  {% endif %}
 
-<p>Total time driven: {{ total_minutes }} minutes</p>
-
-<div>
-    <a href="{% url 'trip_form' daylog.id %}" class="btn btn-success">Create New Trip</a>
-</div>
+  <a href="{% url 'trip_form' daylog.id %}" class="btn btn-success mt-3">Create New Trip</a>
+  </div>
 {% endblock %}

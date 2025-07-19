@@ -96,6 +96,4 @@ def day_summary(request, daylog_id):
     return render(request, 'logger/day_summary.html', {
         'daylog': daylog,
         'trips': daylog.trips.all(),
-        'total_minutes': daylog.total_minutes_driven(),
-        'over_limit': daylog.over_daily_limit()
     })

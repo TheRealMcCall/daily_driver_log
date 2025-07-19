@@ -80,6 +80,13 @@ class Trip(models.Model):
         trip_duration = trip_end_time - trip_start_time
         return int(trip_duration.total_seconds() // 60)
 
+# Convert total minutes into hours and minutes
+    def total_hours_and_minutes(self):
+        total_minutes = self.trip_duration()
+        hours = total_minutes // 60
+        minutes = total_minutes % 60
+        return hours, minutes
+
 # Sets trip limit allowed and returns true or false if limit is exceeded.
     def over_trip_limit(self, max_trip_minutes=330):
         return self.trip_duration() > max_trip_minutes
