@@ -47,8 +47,15 @@ urlpatterns = [
     # Create a new day log
     path(
         'daylog/new/',
-        views.create_daylog,
+        views.daylog_form,
         name='create_daylog',
+        ),
+
+    # Edit a day log
+    path(
+        'daylog/edit/<int:daylog_id>/',
+        views.daylog_form,
+        name='edit_daylog',
         ),
 
     # Delete a day log

@@ -22,26 +22,33 @@ def dashboard(request):
     })
 
 
-# View to display and process the form for creating a new DayLog
-def create_daylog(request):
+# View to create or edit a daylog.
+def daylog_form(request, daylog_id=None):
+    if daylog_id:
+        log = get_object_or_404(DayLog, id=daylog_id, user=request.user)
+    else:
+        log = None
 
     if request.method == 'POST':
         form = DayLogForm(request.POST)
         if form.is_valid():
             # Links DayLog to the current user before saving
             daylog = form.save(commit=False)
-            daylog.user = request.user
+            if log is None:
+                daylog.user = request.user
             daylog.save()
             return redirect('dashboard')
     else:
-        form = DayLogForm()
+        form = DayLogForm(instance=log)
 
-    return render(request, 'logger/create_daylog.html', {'form': form})
+    return render(request, 'logger/daylog_form.html', {
+        'form': form,
+    })
 
 
 # View to delete a day log
 def delete_daylog(request, daylog_id):
-    log =get_object_or_404(DayLog, id=daylog_id, user=request.user)
+    log = get_object_or_404(DayLog, id=daylog_id, user=request.user)
     log.delete()
     return redirect('dashboard')
 

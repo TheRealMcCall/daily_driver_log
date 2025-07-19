@@ -16,6 +16,7 @@
           —
           <a href="{% url 'day_summary' log.id %}">View Summary</a>
            <a href="{% url 'delete_daylog' log.id %}" class="text-danger" onclick="return confirm('Are you sure you want to delete this log?');">Delete</a>
+          <a href="{% url 'edit_daylog' log.id %}">Edit</a> 
         </li>
       {% endfor %}
     </ul>
