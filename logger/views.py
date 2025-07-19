@@ -30,12 +30,11 @@ def daylog_form(request, daylog_id=None):
         log = None
 
     if request.method == 'POST':
-        form = DayLogForm(request.POST)
+        form = DayLogForm(request.POST, instance=log)
         if form.is_valid():
             # Links DayLog to the current user before saving
             daylog = form.save(commit=False)
-            if log is None:
-                daylog.user = request.user
+            daylog.user = request.user
             daylog.save()
             return redirect('dashboard')
     else:
