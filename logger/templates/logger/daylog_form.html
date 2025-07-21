@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2>Create New Day Log</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Create</button>
-  </form>
+<div class="container d-flex justify-content-center mt-5">
+  <div class="w-100" style="max-width: 500px;">
+    <h2 class="text-center mb-4">Create New Day Log</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="id_start_date" class="form-label">Start Date</label>
+        {{ form.start_date }}
+      </div>
+      <container>
+      <div class="text-center d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock %}

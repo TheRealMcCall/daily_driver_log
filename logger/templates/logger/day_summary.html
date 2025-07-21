@@ -31,14 +31,21 @@
     <p>No trips logged for this day.</p>
   {% endif %}
 
-  <h4>Further Info</h4>
-  <p>Total time driven: {{ daylog.total_hours_and_minutes.0 }}h {{ daylog.total_hours_and_minutes.1 }}m</p>
-  {% if daylog.over_daily_limit %}
-    <p class="text-danger">Over Daily Limit</p>
-  {% else %}
-    <p>Within Daily Limit</p>
-  {% endif %}
+ <div class="container mt-5">
+  <div class="text-center">
+    <h4>Further Info</h4>
 
-  <a href="{% url 'trip_form' daylog.id %}" class="btn btn-success mt-3">Create New Trip</a>
+    <p>Total time driven: {{ daylog.total_hours_and_minutes.0 }}h {{ daylog.total_hours_and_minutes.1 }}m</p>
+
+    {% if daylog.over_daily_limit %}
+      <p class="text-danger fw-bold">Over Daily Limit</p>
+    {% else %}
+      <p class="text-success">Within Daily Limit</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+  <a href="{% url 'trip_form' daylog.id %}" class="btn btn-primary mt-3">Create New Trip</a>
   </div>
 {% endblock %}

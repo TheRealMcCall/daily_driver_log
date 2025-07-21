@@ -29,7 +29,8 @@
     {% else %}
       <p>No day logs yet.</p>
     {% endif %}
-
-    <a href="{% url 'create_daylog' %}" class="btn btn-success">Create New Day Log</a>
+<div class="d-flex justify-content-center mt-5">
+    <a href="{% url 'create_daylog' %}" class="btn btn-primary">Create New Day Log</a>
+    </div>
   </div>
 {% endblock %}
