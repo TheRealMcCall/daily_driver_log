@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import DayLog, Trip
 from .forms import TripForm, DayLogForm
 from datetime import date
+from django.contrib import messages
+from django.utils.timezone import now
 
 
 # To render the home page
@@ -39,6 +41,7 @@ def daylog_form(request, daylog_id=None):
             daylog = form.save(commit=False)
             daylog.user = request.user
             daylog.save()
+            messages.success(request, "Today's log created!")
             return redirect('dashboard')
     else:
         form = DayLogForm(instance=log)
@@ -46,6 +49,20 @@ def daylog_form(request, daylog_id=None):
     return render(request, 'logger/daylog_form.html', {
         'form': form,
     })
+
+
+def create_today_log(request):
+    today = now().date()
+    daylog, created = DayLog.objects.get_or_create(
+        user=request.user, start_date=today
+        )
+
+    if created:
+        messages.success(request, "Today's log was created.")
+    else:
+        messages.info(request, "Today's log already exists.")
+
+    return redirect('dashboard')
 
 
 # View to delete a day log

@@ -76,4 +76,10 @@ urlpatterns = [
         views.daylog_history,
         name='daylog_history',
         ),
+
+    path(
+        'daylog/create-today/',
+        views.create_today_log,
+        name='create_today_log',
+        )
 ]
