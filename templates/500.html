@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container text-center mt-5">
+    <h1 class="display-4 text-danger">Something went wrong.</h1>
+    <p class="lead">Sorry, an unexpected error occurred.</p>
+    <a href="{% url 'account_logout' %}" class="btn btn-outline-primary mt-3">Logout and Try Again</a>
+  </div>
+{% endblock %}
