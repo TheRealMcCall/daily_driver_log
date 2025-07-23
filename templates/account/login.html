@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container mt-5" style="max-width: 500px;">
+<div class="container mt-5">
   <h2 class="text-center mb-4">Login</h2>
+
+{% if form.non_field_errors %}
+  <div class="alert alert-danger">
+    {% for error in form.non_field_errors %}
+      <p>{{ error }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
 
   <form method="post" action="{% url 'account_login' %}">
     {% csrf_token %}
@@ -9,11 +17,13 @@
     <div class="mb-3">
       <label for="id_login" class="form-label">Username or Email</label>
       {{ form.login }}
+      {{ form.login.errors }}
     </div>
 
     <div class="mb-3">
       <label for="id_password" class="form-label">Password</label>
       {{ form.password }}
+      {{ form.password.errors }}
     </div>
 
     {% if redirect_field_value %}
