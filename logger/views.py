@@ -11,8 +11,6 @@ def home(request):
     return render(request, 'logger/home.html')
 
 
-
-
 # Displays all the daylogs for logged in user on the dashboard view
 def dashboard(request):
 

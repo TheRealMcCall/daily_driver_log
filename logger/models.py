@@ -35,6 +35,17 @@ class DayLog(models.Model):
             f" Daily Limit Exceeded = {self.over_daily_limit()}"
         )
 
+    def minutes_remaining(self, max_daily_minutes=600):
+        remaining = max_daily_minutes - self.total_minutes_driven()
+        return max(0, remaining)
+
+    def hours_and_minutes_remaining(self, max_daily_minutes=600):
+        remaining = self.minutes_remaining(max_daily_minutes)
+        hours = remaining // 60
+        minutes = remaining % 60
+        return hours, minutes
+
+
     def save(self, *args, **kwargs):
         today = datetime.now().date()
 
