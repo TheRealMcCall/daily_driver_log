@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import DayLog, Trip
 from .forms import TripForm, DayLogForm
+from datetime import date
 
 
 # To render the home page
@@ -17,8 +18,15 @@ def dashboard(request):
          .order_by('-start_date')
     )
 
+    today = date.today()
+    today_log = DayLog.objects.filter(
+        user=request.user, start_date=today
+        ).first()
+
     return render(request, 'logger/dashboard.html', {
         'daylogs': user_daylogs,
+        'today_log': today_log,
+        'today': today,
     })
 
 
