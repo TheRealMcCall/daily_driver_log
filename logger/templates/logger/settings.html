@@ -1,12 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4 text-center">
-  <h2>Update Driving Limits</h2>
-  <form method="post">
+  <h2 class="text-center mb-4">Update Driving Limits</h2>
+
+  <form method="post" class="border p-4 rounded shadow-sm bg-light">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" name="save" class="btn btn-primary me-2">Save</button>
-    <button type="submit" name="reset" class="btn btn-outline-secondary">Reset to Default</button>
+
+    <div class="mb-3">
+      <label for="{{ form.max_daily_minutes.id_for_label }}" class="form-label">Max Daily Driving Time (minutes)</label>
+      {{ form.max_daily_minutes }}
+    </div>
+
+    <div class="mb-3">
+      <label for="{{ form.max_trip_minutes.id_for_label }}" class="form-label">Max Trip Duration (minutes)</label>
+      {{ form.max_trip_minutes }}
+    </div>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <button type="submit" name="save" class="btn btn-primary">Save</button>
+      <button type="submit" name="reset" class="btn btn-outline-secondary">Reset to Default</button>
+    </div>
   </form>
+
+  <div class="d-flex justify-content-center mt-4">
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Back to Dashboard</a>
+  </div>
 </div>
 {% endblock %}
