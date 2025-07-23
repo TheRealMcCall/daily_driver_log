@@ -1,5 +1,5 @@
 from django import forms
-from .models import Trip, DayLog
+from .models import Trip, DayLog, UserSettings
 from allauth.account.forms import SignupForm
 
 
@@ -48,3 +48,9 @@ class CustomSignupForm(SignupForm):
         user.last_name = self.cleaned_data['last_name']
         user.save()
         return user
+
+
+class UserSettingsForm(forms.ModelForm):
+    class Meta:
+        model = UserSettings
+        fields = ['max_daily_minutes', 'max_trip_minutes']

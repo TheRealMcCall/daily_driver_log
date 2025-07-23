@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import DayLog, Trip
-from .forms import TripForm, DayLogForm
+from .models import DayLog, Trip, UserSettings
+from .forms import TripForm, DayLogForm, UserSettingsForm
 from datetime import date
 from django.contrib import messages
 from django.utils.timezone import now
@@ -126,3 +126,25 @@ def day_summary(request, daylog_id):
         'daylog': daylog,
         'trips': daylog.trips.all(),
     })
+
+
+def settings_view(request):
+    settings, created = UserSettings.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        if 'reset' in request.POST:
+            settings.max_daily_minutes = 600
+            settings.max_trip_minutes = 330
+            settings.save()
+            messages.success(request, "Settings reset to default.")
+            return redirect('settings')
+
+        form = UserSettingsForm(request.POST, instance=settings)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Settings updated successfully.")
+            return redirect('dashboard')
+    else:
+        form = UserSettingsForm(instance=settings)
+
+    return render(request, 'logger/settings.html', {'form': form})

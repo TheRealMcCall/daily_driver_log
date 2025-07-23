@@ -81,5 +81,11 @@ urlpatterns = [
         'daylog/create-today/',
         views.create_today_log,
         name='create_today_log',
-        )
+        ),
+
+    path(
+        'settings/',
+        views.settings_view,
+        name='settings'
+        ),
 ]

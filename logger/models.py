@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from django.core.exceptions import ValidationError
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # Create your models here.
 
 
@@ -23,8 +25,10 @@ class DayLog(models.Model):
         return hours, minutes
 
 # Sets daily limit allowed and returns true or false if limit is exceeded.
-    def over_daily_limit(self, max_daily_minutes=600):
-        return self.total_minutes_driven() > max_daily_minutes
+    def over_daily_limit(self):
+        user_settings = getattr(self.user, 'usersettings', None)
+        max_minutes = user_settings.max_daily_minutes if user_settings else 600
+        return self.total_minutes_driven() > max_minutes
 
 # Adjusts how DayLogs are shown in admin.
     def __str__(self):
@@ -44,7 +48,6 @@ class DayLog(models.Model):
         hours = remaining // 60
         minutes = remaining % 60
         return hours, minutes
-
 
     def save(self, *args, **kwargs):
         today = datetime.now().date()
@@ -131,8 +134,10 @@ class Trip(models.Model):
         return hours, minutes
 
 # Sets trip limit allowed and returns true or false if limit is exceeded.
-    def over_trip_limit(self, max_trip_minutes=330):
-        return self.trip_duration() > max_trip_minutes
+    def over_trip_limit(self):
+        user_settings = getattr(self.day_log.user, 'usersettings', None)
+        max_minutes = user_settings.max_trip_minutes if user_settings else 330
+        return self.trip_duration() > max_minutes
 
 # adjusts how trips are shown in admin
     def __str__(self):
@@ -144,3 +149,18 @@ class Trip(models.Model):
             f" Duration: {self.trip_duration()} minutes"
             f" Trip limit exceeded = {self.over_trip_limit()}"
         )
+
+
+class UserSettings(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    max_daily_minutes = models.PositiveIntegerField(default=600)
+    max_trip_minutes = models.PositiveIntegerField(default=330)
+
+    def __str__(self):
+        return f"{self.user.username}'s settings"
+
+
+@receiver(post_save, sender=User)
+def create_user_settings(sender, instance, created, **kwargs):
+    if created:
+        UserSettings.objects.create(user=instance)

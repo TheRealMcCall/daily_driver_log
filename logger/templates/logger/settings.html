@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4 text-center">
+  <h2>Update Driving Limits</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="save" class="btn btn-primary me-2">Save</button>
+    <button type="submit" name="reset" class="btn btn-outline-secondary">Reset to Default</button>
+  </form>
+</div>
+{% endblock %}
