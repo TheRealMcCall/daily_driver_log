@@ -63,6 +63,25 @@ class Trip(models.Model):
             if trip_end_time <= trip_start_time:
                 raise ValidationError(
                     "Finish time must be after start time.")
+
+        check_end_time = trip_end_time
+
+        for other_trip in self.day_log.trips.exclude(pk=self.pk):
+            other_start = datetime.combine(
+                self.day_log.start_date, other_trip.trip_start_time
+                )
+            other_end = datetime.combine(
+                self.day_log.start_date, other_trip.trip_finish_time
+                )
+
+            if other_trip.is_overnight and other_end <= other_start:
+                other_end += timedelta(days=1)
+            if self.is_overnight and trip_end_time <= trip_start_time:
+                trip_end_time += timedelta(days=1)
+
+            if trip_start_time < other_end and check_end_time > other_start:
+                raise ValidationError("This trip overlaps with another trip.")
+
         super().save(*args, **kwargs)
 
 # Calculates the individual trip duration.
