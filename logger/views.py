@@ -9,14 +9,10 @@ def home(request):
     return render(request, 'logger/home.html')
 
 
+
+
 # Displays all the daylogs for logged in user on the dashboard view
 def dashboard(request):
-
-    user_daylogs = (
-         DayLog.objects
-         .filter(user=request.user)
-         .order_by('-start_date')
-    )
 
     today = date.today()
     today_log = DayLog.objects.filter(
@@ -24,7 +20,6 @@ def dashboard(request):
         ).first()
 
     return render(request, 'logger/dashboard.html', {
-        'daylogs': user_daylogs,
         'today_log': today_log,
         'today': today,
     })
@@ -66,6 +61,17 @@ def delete_trip(request, daylog_id, trip_id):
     trip = get_object_or_404(Trip, id=trip_id, day_log=daylog)
     trip.delete()
     return redirect('day_summary', daylog_id=daylog.id)
+
+
+def daylog_history(request):
+    user_daylogs = (
+        DayLog.objects
+        .filter(user=request.user)
+        .order_by('-start_date')
+    )
+    return render(request, 'logger/daylog_history.html', {
+        'daylogs': user_daylogs,
+    })
 
 
 # View for creating and editing a trip

@@ -69,5 +69,11 @@ urlpatterns = [
     path(
         'accounts/',
         include('allauth.urls'),
-        )
+        ),
+
+    path(
+        'history/',
+        views.daylog_history,
+        name='daylog_history',
+        ),
 ]
