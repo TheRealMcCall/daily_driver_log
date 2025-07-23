@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container mt-4">
-    <h2 class="text-center">Welcome {{ user.username }}, please find your day logs below:</h2>
+<div class="container mt-4">
+  <h2 class="text-center">Welcome {{ user.first_name }}, please find your day logs below:</h2>
 
-    {% if daylogs %}
-      <ul class="list-group mb-4">
-        {% for log in daylogs %}
-          <li class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-md-center">
-            <div>
-              <strong>{{ log.start_date }}</strong> —
-              {{ log.total_hours_and_minutes.0 }}h {{ log.total_hours_and_minutes.1 }}m driven —
-              {% if log.over_daily_limit %}
-                <span class="text-danger fw-bold">Over Limit!</span>
-              {% else %}
-                <span class="text-success">Within Limit</span>
-              {% endif %}
-            </div>
-            <div class="mt-2 mt-md-0">
-              <a href="{% url 'day_summary' log.id %}" class="btn btn-outline-primary btn-sm me-2">View</a>
-              <a href="{% url 'edit_daylog' log.id %}" class="btn btn-outline-secondary btn-sm me-2">Edit</a>
-              <a href="{% url 'delete_daylog' log.id %}" class="btn btn-outline-danger btn-sm"
-                 onclick="return confirm('Are you sure you want to delete this log?');">Delete</a>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>No day logs yet.</p>
-    {% endif %}
-<div class="d-flex justify-content-center mt-5">
+  {% if daylogs %}
+  <ul class="list-group mb-4">
+    {% for log in daylogs %}
+    <li class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+      <div>
+        <strong>{{ log.start_date }}</strong> —
+        {{ log.total_hours_and_minutes.0 }}h {{ log.total_hours_and_minutes.1 }}m driven —
+        {% if log.over_daily_limit %}
+        <span class="text-danger fw-bold">Over Limit!</span>
+        {% else %}
+        <span class="text-success">Within Limit</span>
+        {% endif %}
+      </div>
+      <div class="mt-2 mt-md-0">
+        <a href="{% url 'day_summary' log.id %}" class="btn btn-outline-primary btn-sm me-2">View</a>
+        <a href="{% url 'edit_daylog' log.id %}" class="btn btn-outline-secondary btn-sm me-2">Edit</a>
+        <a href="{% url 'delete_daylog' log.id %}" class="btn btn-outline-danger btn-sm"
+          onclick="return confirm('Are you sure you want to delete this log?');">Delete</a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No day logs yet.</p>
+  {% endif %}
+  <div class="d-flex justify-content-center mt-5">
     <a href="{% url 'create_daylog' %}" class="btn btn-primary">Create New Day Log</a>
-    </div>
   </div>
+</div>
 {% endblock %}

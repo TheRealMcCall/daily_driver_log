@@ -120,6 +120,10 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_UNIQUE_EMAIL = True
 
+ACCOUNT_FORMS = {
+    'signup': 'logger.forms.CustomSignupForm'
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
