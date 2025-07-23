@@ -6,18 +6,28 @@
   <form method="post" class="border p-4 rounded shadow-sm bg-light">
     {% csrf_token %}
 
-    <div class="mb-3">
-      <label for="{{ form.max_daily_minutes.id_for_label }}" class="form-label">Max Daily Driving Time (minutes)</label>
-      {{ form.max_daily_minutes }}
+    <div class="mb-3 row">
+      <label class="form-label">Max Daily Driving Time</label>
+      <div class="col d-flex gap-2 justify-content-center">
+        {{ form.max_daily_hours }}
+        <span>h</span>
+        {{ form.max_daily_minutes_only }}
+        <span>m</span>
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label for="{{ form.max_trip_minutes.id_for_label }}" class="form-label">Max Trip Duration (minutes)</label>
-      {{ form.max_trip_minutes }}
+    <div class="mb-3 row">
+      <label class="form-label">Max Trip Duration</label>
+      <div class="col d-flex gap-2 justify-content-center">
+        {{ form.max_trip_hours }}
+        <span>h</span>
+        {{ form.max_trip_minutes_only }}
+        <span>m</span>
+      </div>
     </div>
 
     <div class="d-flex justify-content-center gap-3 mt-4">
-      <button type="submit" name="save" class="btn btn-primary">Save</button>
+      <button type="submit" name="save" class="btn btn-primary">Save Custom Settings</button>
       <button type="submit" name="reset" class="btn btn-outline-secondary">Reset to Default</button>
     </div>
   </form>

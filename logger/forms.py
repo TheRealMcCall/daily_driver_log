@@ -51,6 +51,38 @@ class CustomSignupForm(SignupForm):
 
 
 class UserSettingsForm(forms.ModelForm):
+    max_daily_hours = forms.IntegerField(min_value=0, label="Max Daily Hours")
+    max_daily_minutes_only = forms.IntegerField(min_value=0, max_value=59, label="Max Daily Minutes")
+
+    max_trip_hours = forms.IntegerField(min_value=0, label="Max Trip Hours")
+    max_trip_minutes_only = forms.IntegerField(min_value=0, max_value=59, label="Max Trip Minutes")
+
     class Meta:
         model = UserSettings
-        fields = ['max_daily_minutes', 'max_trip_minutes']
+        fields = []
+
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get('instance')
+        initial = kwargs.setdefault('initial', {})
+
+        if instance:
+            initial['max_daily_hours'] = instance.max_daily_minutes // 60
+            initial['max_daily_minutes_only'] = instance.max_daily_minutes % 60
+            initial['max_trip_hours'] = instance.max_trip_minutes // 60
+            initial['max_trip_minutes_only'] = instance.max_trip_minutes % 60
+
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.max_daily_minutes = (
+            self.cleaned_data['max_daily_hours'] * 60 +
+            self.cleaned_data['max_daily_minutes_only']
+        )
+        instance.max_trip_minutes = (
+            self.cleaned_data['max_trip_hours'] * 60 +
+            self.cleaned_data['max_trip_minutes_only']
+        )
+        if commit:
+            instance.save()
+        return instance
