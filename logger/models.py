@@ -35,6 +35,19 @@ class DayLog(models.Model):
             f" Daily Limit Exceeded = {self.over_daily_limit()}"
         )
 
+    def save(self, *args, **kwargs):
+        today = datetime.now().date()
+
+        if self.start_date < today - timedelta(days=2):
+            raise ValidationError(
+                "You can only create logs from the last 2 days."
+                )
+
+        if self.start_date > today:
+            raise ValidationError("You cannot create logs for future dates.")
+
+        super().save(*args, **kwargs)
+
 
 # Model for individual trips
 class Trip(models.Model):
