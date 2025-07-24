@@ -35,8 +35,25 @@ h3 {
     text-decoration: underline;
 }
 
-/* Footer */
+/* Footer styling */
 footer {
     background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
     color: white;
+}
+
+/* Button styling */
+.btn {
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
 }
