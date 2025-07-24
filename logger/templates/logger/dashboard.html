@@ -5,7 +5,7 @@
 
   {% if today_log %}
   <div class="alert alert-info mt-4 text-center">
-    <h5 class="mb-2">Today’s Summary ({{ today_log.start_date }}):</h5>
+    <h3 class="mb-2">Today’s Summary ({{ today_log.start_date }}):</h3>
     {% with today_log.total_hours_and_minutes as time %}
     <p>
       <strong>{{ time.0 }}h {{ time.1 }}m</strong> driven —

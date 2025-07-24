@@ -7,6 +7,7 @@ from django.utils.timezone import now
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 
+
 # To render the home page
 def home(request):
     return render(request, 'logger/home.html')
