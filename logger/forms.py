@@ -42,6 +42,10 @@ class CustomSignupForm(SignupForm):
         max_length=30, label='Last Name', required=True
         )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password2'].label = "Confirm Password"
+
     def save(self, request):
         user = super().save(request)
         user.first_name = self.cleaned_data['first_name']

@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container mt-5">
+<div class="container form-container mt-5">
   <h2 class="text-center mb-4">Login</h2>
 
-{% if form.non_field_errors %}
+  {% if form.non_field_errors %}
   <div class="alert alert-danger">
     {% for error in form.non_field_errors %}
-      <p>{{ error }}</p>
+    <p>{{ error }}</p>
     {% endfor %}
   </div>
-{% endif %}
+  {% endif %}
 
   <form method="post" action="{% url 'account_login' %}">
     {% csrf_token %}
 
     <div class="mb-3">
-      <label for="id_login" class="form-label">Username or Email</label>
+      <label for="id_login" class="form-label">Username</label>
       {{ form.login }}
       {{ form.login.errors }}
     </div>
@@ -27,7 +27,7 @@
     </div>
 
     {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
 
     <button type="submit" class="btn btn-primary w-100">Login</button>
