@@ -166,7 +166,7 @@ class UserSettings(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s settings"
-    
+
     @property
     def daily_hours(self):
         return self.max_daily_minutes // 60
