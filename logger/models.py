@@ -60,6 +60,14 @@ class DayLog(models.Model):
         if self.start_date > today:
             raise ValidationError("You cannot create logs for future dates.")
 
+        existing = DayLog.objects.filter(
+            user=self.user,
+            start_date=self.start_date
+        ).exclude(pk=self.pk)
+
+        if existing.exists():
+            raise ValidationError("A DayLog for this date already exists.")
+
         super().save(*args, **kwargs)
 
 
