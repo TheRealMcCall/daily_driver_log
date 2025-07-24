@@ -45,8 +45,21 @@ def daylog_form(request, daylog_id=None):
     else:
         form = DayLogForm(instance=log)
 
+    existing_dates = (
+        DayLog.objects
+        .filter(user=request.user)
+        .exclude(pk=log.pk if log else None)
+        .values_list('start_date', flat=True)
+    )
+
+    existing_dates_json = json.dumps(
+        list(existing_dates),
+        cls=DjangoJSONEncoder
+    )
+
     return render(request, 'logger/daylog_form.html', {
         'form': form,
+        'existing_dates_json': existing_dates_json,
     })
 
 
