@@ -1,28 +1,37 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container d-flex justify-content-center mt-5">
-  <div class="w-100" style="max-width: 500px;">
-    <h2 class="text-center mb-4">New Trip for {{ daylog.start_date }}</h2>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+      <h2 class="text-center mb-4">New Trip for {{ daylog.start_date }}</h2>
 
-    <form method="post">
-      {% csrf_token %}
-      <div class="mb-3">
-        <label for="id_trip_start_time" class="form-label">Start Time</label>
-        {{ form.trip_start_time }}
-      </div>
-      <div class="mb-3">
-        <label for="id_trip_finish_time" class="form-label">Finish Time</label>
-        {{ form.trip_finish_time }}
-      </div>
-      <div class="form-check mb-3">
-        {{ form.is_overnight }}
-        <label for="id_is_overnight" class="form-check-label">Overnight Trip</label>
-      </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary">Save Trip</button>
-      </div>
-    </form>
+      <form method="post" id="trip-form">
+        {% csrf_token %}
+
+        <div id="js-validation-error" class="alert alert-danger d-none" role="alert"></div>
+
+        <div class="mb-3">
+          <label for="id_trip_start_time" class="form-label">Start Time</label>
+          {{ form.trip_start_time }}
+        </div>
+        <div class="mb-3">
+          <label for="id_trip_finish_time" class="form-label">Finish Time</label>
+          {{ form.trip_finish_time }}
+        </div>
+        <div class="form-check mb-3">
+          {{ form.is_overnight }}
+          <label for="id_is_overnight" class="form-check-label ms-2">Overnight Trip</label>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Save Trip</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
+
+<script src="{% static 'js/trip_form.js' %}" defer></script>
+
 {% endblock %}
