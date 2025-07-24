@@ -1,46 +1,56 @@
+"""
+Forms for Trip, DayLog, user settings, and custom signup handling.
+"""
+
 from django import forms
 from .models import Trip, DayLog, UserSettings
 from allauth.account.forms import SignupForm
 
 
-# Form to create or update a trip.
 class TripForm(forms.ModelForm):
+    """
+    Form to create or update a Trip instance.
+    """
     class Meta:
-        # Links this form to the Trip model.
         model = Trip
         fields = ['trip_start_time', 'trip_finish_time', 'is_overnight']
         widgets = {
             'trip_start_time': forms.TimeInput(
                 attrs={'type': 'time', 'class': 'form-control'}
-                 ),
+            ),
             'trip_finish_time': forms.TimeInput(
                 attrs={'type': 'time', 'class': 'form-control'}
-                 ),
+            ),
             'is_overnight': forms.CheckboxInput(
                 attrs={'class': 'form-check-input'}
-                ),
+            ),
         }
 
 
-# Form to create a Daylog.
 class DayLogForm(forms.ModelForm):
+    """
+    Form to create or edit a DayLog instance.
+    """
     class Meta:
-        # Links this form to the DayLog model.
         model = DayLog
         fields = ['start_date']
         widgets = {
             'start_date': forms.DateInput(
-                attrs={'type': 'date', 'class': 'form-control'}),
+                attrs={'type': 'date', 'class': 'form-control'}
+            ),
         }
 
 
 class CustomSignupForm(SignupForm):
+    """
+    Extended Allauth signup form to collect first and last name.
+    """
     first_name = forms.CharField(
         max_length=30, label='First Name', required=True
-     )
+    )
     last_name = forms.CharField(
         max_length=30, label='Last Name', required=True
-        )
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -55,11 +65,27 @@ class CustomSignupForm(SignupForm):
 
 
 class UserSettingsForm(forms.ModelForm):
-    max_daily_hours = forms.IntegerField(min_value=0, label="Max Daily Hours")
-    max_daily_minutes_only = forms.IntegerField(min_value=0, max_value=59, label="Max Daily Minutes")
-
-    max_trip_hours = forms.IntegerField(min_value=0, label="Max Trip Hours")
-    max_trip_minutes_only = forms.IntegerField(min_value=0, max_value=59, label="Max Trip Minutes")
+    """
+    Form to allow user customization of daily and trip driving limits.
+    """
+    max_daily_hours = forms.IntegerField(
+        min_value=0,
+        label="Max Daily Hours"
+    )
+    max_daily_minutes_only = forms.IntegerField(
+        min_value=0,
+        max_value=59,
+        label="Max Daily Minutes"
+    )
+    max_trip_hours = forms.IntegerField(
+        min_value=0,
+        label="Max Trip Hours"
+    )
+    max_trip_minutes_only = forms.IntegerField(
+        min_value=0,
+        max_value=59,
+        label="Max Trip Minutes"
+    )
 
     class Meta:
         model = UserSettings
@@ -71,9 +97,13 @@ class UserSettingsForm(forms.ModelForm):
 
         if instance:
             initial['max_daily_hours'] = instance.max_daily_minutes // 60
-            initial['max_daily_minutes_only'] = instance.max_daily_minutes % 60
+            initial['max_daily_minutes_only'] = (
+                instance.max_daily_minutes % 60
+            )
             initial['max_trip_hours'] = instance.max_trip_minutes // 60
-            initial['max_trip_minutes_only'] = instance.max_trip_minutes % 60
+            initial['max_trip_minutes_only'] = (
+                instance.max_trip_minutes % 60
+            )
 
         super().__init__(*args, **kwargs)
 
