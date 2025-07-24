@@ -39,10 +39,38 @@
         No
         {% endif %}
       </div>
+
       <div class="mt-2 mt-md-0 d-flex gap-2">
         <a href="{% url 'edit_trip' daylog.id trip.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
-        <a href="{% url 'delete_trip' daylog.id trip.id %}" class="btn btn-sm btn-outline-danger"
-          onclick="return confirm('Delete this trip?');">Delete</a>
+        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+          data-bs-target="#confirmDeleteTripModal{{ trip.id }}">
+          Delete
+        </button>
+      </div>
+
+      <div class="modal fade" id="confirmDeleteTripModal{{ trip.id }}" tabindex="-1"
+        aria-labelledby="confirmDeleteTripLabel{{ trip.id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h2 class="modal-title fs-5" id="confirmDeleteTripLabel{{ trip.id }}">
+                Confirm Deletion
+              </h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body text-center">
+              Are you sure you want to delete this trip?
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <a href="{% url 'delete_trip' daylog.id trip.id %}" class="btn btn-danger">Delete</a>
+            </div>
+
+          </div>
+        </div>
       </div>
     </li>
     {% endfor %}
