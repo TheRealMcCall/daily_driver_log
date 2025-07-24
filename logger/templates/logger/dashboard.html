@@ -22,11 +22,10 @@
         </a>
       </div>
       <div class="mt-2 text-center">
-        <form method="post" action="{% url 'delete_daylog' today_log.id %}"
-          onsubmit="return confirm('Delete today\'s log?');">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-outline-danger btn-sm">Delete Today’s Log</button>
-        </form>
+        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+          data-bs-target="#deleteDayLogModal">
+          Delete Today’s Log
+        </button>
       </div>
   </div>
   {% else %}
@@ -52,5 +51,35 @@
 <div class="d-flex justify-content-center mt-4">
   <a href="{% url 'daylog_history' %}" class="btn btn-outline-primary">History of logs</a>
 </div>
+{% if today_log %}
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteDayLogModal" tabindex="-1" aria-labelledby="deleteDayLogModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteDayLogModalLabel">
+          Confirm Deletion
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        Are you sure you want to delete today’s log?
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form method="post" action="{% url 'delete_daylog' today_log.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endif %}
 
 {% endblock %}
