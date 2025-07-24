@@ -13,3 +13,24 @@ h3 {
     font-weight: 700;
     color: #2a2a72;
 }
+
+/* Navbar styling */
+.navbar {
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar brand font and link styling */
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: white !important;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+/* Hover Over styling for navbar */
+.navbar .nav-link:hover {
+    color: #2a2a72 !important;
+    text-decoration: underline;
+}
