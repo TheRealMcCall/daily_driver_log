@@ -149,10 +149,12 @@ def trip_form(request, daylog_id, trip_id=None):
 def day_summary(request, daylog_id):
 
     daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)
+    user_settings = getattr(request.user, 'usersettings', None)
 
     return render(request, 'logger/day_summary.html', {
         'daylog': daylog,
         'trips': daylog.trips.all(),
+        'user_settings': user_settings,
     })
 
 
