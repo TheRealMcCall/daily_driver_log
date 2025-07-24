@@ -8,20 +8,26 @@ from django.core.serializers.json import DjangoJSONEncoder
 import json
 
 
-# To render the home page
 def home(request):
+    """
+    Render the home page.
+    """
     return render(request, 'logger/home.html')
 
 
-# Displays all the daylogs for logged in user on the dashboard view
 def dashboard(request):
-
+    """
+    Display the dashboard with today's DayLog and user settings.
+    """
     today = date.today()
     today_log = DayLog.objects.filter(
-        user=request.user, start_date=today
-        ).first()
+        user=request.user,
+        start_date=today
+    ).first()
 
-    user_settings = UserSettings.objects.filter(user=request.user).first()
+    user_settings = UserSettings.objects.filter(
+        user=request.user
+    ).first()
 
     return render(request, 'logger/dashboard.html', {
         'today_log': today_log,
@@ -30,17 +36,22 @@ def dashboard(request):
     })
 
 
-# View to create or edit a daylog.
 def daylog_form(request, daylog_id=None):
+    """
+    View to create or edit a DayLog.
+    """
     if daylog_id:
-        log = get_object_or_404(DayLog, id=daylog_id, user=request.user)
+        log = get_object_or_404(
+            DayLog,
+            id=daylog_id,
+            user=request.user
+        )
     else:
         log = None
 
     if request.method == 'POST':
         form = DayLogForm(request.POST, instance=log)
         if form.is_valid():
-            # Links DayLog to the current user before saving
             daylog = form.save(commit=False)
             daylog.user = request.user
             daylog.save()
@@ -68,10 +79,14 @@ def daylog_form(request, daylog_id=None):
 
 
 def create_today_log(request):
+    """
+    Create a DayLog for today if one does not already exist.
+    """
     today = now().date()
     daylog, created = DayLog.objects.get_or_create(
-        user=request.user, start_date=today
-        )
+        user=request.user,
+        start_date=today
+    )
 
     if created:
         messages.success(request, "Today's log was created.")
@@ -81,46 +96,72 @@ def create_today_log(request):
     return redirect('dashboard')
 
 
-# View to delete a day log
 def delete_daylog(request, daylog_id):
-    log = get_object_or_404(DayLog, id=daylog_id, user=request.user)
+    """
+    Delete a specific DayLog by ID.
+    """
+    log = get_object_or_404(
+        DayLog,
+        id=daylog_id,
+        user=request.user
+    )
     log.delete()
     return redirect('dashboard')
 
 
-# View to delete a specific trip
 def delete_trip(request, daylog_id, trip_id):
-    daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)
-    trip = get_object_or_404(Trip, id=trip_id, day_log=daylog)
+    """
+    Delete a specific Trip within a DayLog.
+    """
+    daylog = get_object_or_404(
+        DayLog,
+        id=daylog_id,
+        user=request.user
+    )
+    trip = get_object_or_404(
+        Trip,
+        id=trip_id,
+        day_log=daylog
+    )
     trip.delete()
     return redirect('day_summary', daylog_id=daylog.id)
 
 
 def daylog_history(request):
-    user_daylogs = (
-        DayLog.objects
-        .filter(user=request.user)
-        .order_by('-start_date')
-    )
+    """
+    Display the user's full history of DayLogs.
+    """
+    user_daylogs = DayLog.objects.filter(
+        user=request.user
+    ).order_by('-start_date')
+
     return render(request, 'logger/daylog_history.html', {
         'daylogs': user_daylogs,
     })
 
 
-# View for creating and editing a trip
 def trip_form(request, daylog_id, trip_id=None):
-    daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)
+    """
+    Create or edit a Trip for a given DayLog.
+    """
+    daylog = get_object_or_404(
+        DayLog,
+        id=daylog_id,
+        user=request.user
+    )
 
-    # If editing, below gets the specific trip.
     if trip_id:
-        trip = get_object_or_404(Trip, id=trip_id, day_log=daylog)
+        trip = get_object_or_404(
+            Trip,
+            id=trip_id,
+            day_log=daylog
+        )
     else:
         trip = None
 
     if request.method == 'POST':
         form = TripForm(request.POST, instance=trip)
         if form.is_valid():
-            # Link the trip to the daylog before saving.
             trip = form.save(commit=False)
             trip.day_log = daylog
             trip.save()
@@ -132,6 +173,7 @@ def trip_form(request, daylog_id, trip_id=None):
         daylog.trips.exclude(id=trip_id)
         .values("trip_start_time", "trip_finish_time")
     )
+
     existing_trips_json = json.dumps(
         list(existing_trips),
         cls=DjangoJSONEncoder
@@ -145,10 +187,16 @@ def trip_form(request, daylog_id, trip_id=None):
     })
 
 
-# View to show a summary of a specific DayLog and its related trips
 def day_summary(request, daylog_id):
+    """
+    Display a summary of a DayLog and its associated Trips.
+    """
+    daylog = get_object_or_404(
+        DayLog,
+        id=daylog_id,
+        user=request.user
+    )
 
-    daylog = get_object_or_404(DayLog, id=daylog_id, user=request.user)
     user_settings = getattr(request.user, 'usersettings', None)
 
     return render(request, 'logger/day_summary.html', {
@@ -159,7 +207,12 @@ def day_summary(request, daylog_id):
 
 
 def settings_view(request):
-    settings, created = UserSettings.objects.get_or_create(user=request.user)
+    """
+    View to display and update user driving limit settings.
+    """
+    settings, created = UserSettings.objects.get_or_create(
+        user=request.user
+    )
 
     if request.method == 'POST':
         if 'reset' in request.POST:
@@ -177,4 +230,6 @@ def settings_view(request):
     else:
         form = UserSettingsForm(instance=settings)
 
-    return render(request, 'logger/settings.html', {'form': form})
+    return render(request, 'logger/settings.html', {
+        'form': form
+    })
