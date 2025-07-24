@@ -4,7 +4,7 @@
   <h2 class="text-center">Welcome {{ user.first_name }}</h2>
 
   {% if today_log %}
-  <div class="alert alert-info mt-4 text-center">
+  <div class="alert alert-light text-center border border-primary mt-4">
     <h3 class="mb-2">Today’s Summary ({{ today_log.start_date }}):</h3>
     {% with today_log.total_hours_and_minutes as time %}
     <p>
@@ -36,8 +36,21 @@
   </div>
   {% endif %}
 
-  <div class="d-flex justify-content-center mt-4">
-    <a href="{% url 'daylog_history' %}" class="btn btn-outline-primary">History of logs</a>
+  {% if user_settings %}
+  <div class="alert alert-light text-center border border-primary mb-4">
+    <h3 class="mb-2">Your Driving Limits</h3>
+    <p class="mb-1">
+      <strong>Daily Limit:</strong> {{ user_settings.daily_hours }}h {{ user_settings.daily_minutes_only }}m<br>
+      <strong>Trip Limit:</strong> {{ user_settings.trip_hours }}h {{ user_settings.trip_minutes_only }}m
+    </p>
+    <a href="{% url 'settings' %}" class="btn btn-sm btn-outline-primary mt-2">Edit Limits</a>
   </div>
+  {% endif %}
+
 </div>
+
+<div class="d-flex justify-content-center mt-4">
+  <a href="{% url 'daylog_history' %}" class="btn btn-outline-primary">History of logs</a>
+</div>
+
 {% endblock %}

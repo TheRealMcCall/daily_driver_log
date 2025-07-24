@@ -20,10 +20,13 @@ def dashboard(request):
     today_log = DayLog.objects.filter(
         user=request.user, start_date=today
         ).first()
+    
+    user_settings = UserSettings.objects.filter(user=request.user).first()
 
     return render(request, 'logger/dashboard.html', {
         'today_log': today_log,
         'today': today,
+        'user_settings': user_settings,
     })
 
 

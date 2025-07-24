@@ -166,6 +166,22 @@ class UserSettings(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s settings"
+    
+    @property
+    def daily_hours(self):
+        return self.max_daily_minutes // 60
+
+    @property
+    def daily_minutes_only(self):
+        return self.max_daily_minutes % 60
+
+    @property
+    def trip_hours(self):
+        return self.max_trip_minutes // 60
+
+    @property
+    def trip_minutes_only(self):
+        return self.max_trip_minutes % 60
 
 
 @receiver(post_save, sender=User)
