@@ -32,6 +32,10 @@
   </div>
 </div>
 
+<script>
+  const existingTrips = JSON.parse('{{ existing_trips_json|escapejs }}');
+</script>
+
 <script src="{% static 'js/trip_form.js' %}" defer></script>
 
 {% endblock %}

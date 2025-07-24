@@ -4,7 +4,8 @@ from .forms import TripForm, DayLogForm, UserSettingsForm
 from datetime import date
 from django.contrib import messages
 from django.utils.timezone import now
-
+from django.core.serializers.json import DjangoJSONEncoder
+import json
 
 # To render the home page
 def home(request):
@@ -110,10 +111,20 @@ def trip_form(request, daylog_id, trip_id=None):
     else:
         form = TripForm(instance=trip)
 
+    existing_trips = (
+        daylog.trips.exclude(id=trip_id)
+        .values("trip_start_time", "trip_finish_time")
+    )
+    existing_trips_json = json.dumps(
+        list(existing_trips),
+        cls=DjangoJSONEncoder
+    )
+
     return render(request, 'logger/trip_form.html', {
         'form': form,
         'daylog': daylog,
         'trip': trip,
+        'existing_trips_json': existing_trips_json,
     })
 
 

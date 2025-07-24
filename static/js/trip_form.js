@@ -12,11 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const end = endInput.value;
         const isOvernight = overnightCheckbox.checked;
 
-        if (!start || !end) return; // Let Django handle required fields
+        if (!start || !end) return;
 
         if (!isOvernight && end <= start) {
             showError("Trip finish time must be after the trip start time unless the trip is overnight.");
             event.preventDefault();
+            return;
+        }
+
+        if (!isOvernight && isOverlapping(start, end, existingTrips)) {
+            showError("This trip overlaps with an existing trip.");
+            event.preventDefault();
+            return;
         }
     });
 
@@ -30,3 +37,20 @@ document.addEventListener("DOMContentLoaded", () => {
         errorBox.classList.add("d-none");
     }
 });
+
+function isOverlapping(start, end, existingTrips) {
+    const newStart = toMinutes(start);
+    const newEnd = toMinutes(end);
+
+    return existingTrips.some(trip => {
+        const tripStart = toMinutes(trip.trip_start_time);
+        const tripEnd = toMinutes(trip.trip_finish_time);
+
+        return newStart < tripEnd && newEnd > tripStart;
+    });
+}
+
+function toMinutes(timeStr) {
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    return hours * 60 + minutes;
+}
