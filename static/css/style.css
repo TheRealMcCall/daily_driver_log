@@ -109,3 +109,10 @@ footer {
     transform: scale(1.05);
     opacity: 0.9;
 }
+
+.time-input-row input {
+    max-width: 75px;
+    min-width: 60px;
+    flex: 1;
+    text-align: center;
+}

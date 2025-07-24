@@ -6,7 +6,7 @@
   <form method="post" class="border p-4 rounded shadow-sm bg-light">
     {% csrf_token %}
 
-    <div class="mb-3 row">
+    <div class="mb-3 row time-input-row">
       <label class="form-label">Max Daily Driving Time</label>
       <div class="col d-flex gap-2 justify-content-center">
         {{ form.max_daily_hours }}
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="mb-3 row">
+    <div class="mb-3 row time-input-row">
       <label class="form-label">Max Trip Duration</label>
       <div class="col d-flex gap-2 justify-content-center">
         {{ form.max_trip_hours }}
