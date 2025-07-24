@@ -34,3 +34,9 @@ h3 {
     color: #2a2a72 !important;
     text-decoration: underline;
 }
+
+/* Footer */
+footer {
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
