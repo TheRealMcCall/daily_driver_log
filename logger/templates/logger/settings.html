@@ -7,7 +7,7 @@
     {% csrf_token %}
 
     <div class="mb-3 row time-input-row">
-      <label class="form-label">Max Daily Driving Time</label>
+      <label for="{{ form.max_daily_hours.id_for_label }}" class="form-label">Max Daily Driving Time</label>
       <div class="col d-flex gap-2 justify-content-center">
         {{ form.max_daily_hours }}
         <span>h</span>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="mb-3 row time-input-row">
-      <label class="form-label">Max Trip Duration</label>
+      <label for="{{ form.max_trip_hours.id_for_label }}" class="form-label">Max Trip Duration</label>
       <div class="col d-flex gap-2 justify-content-center">
         {{ form.max_trip_hours }}
         <span>h</span>

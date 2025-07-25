@@ -4,7 +4,7 @@
 <div class="container mt-4">
   <h2 class="text-center mb-4">Summary for {{ daylog.start_date }}</h2>
 
-  <div class="alert alert-light text-center">
+  <section class="alert alert-light text-center">
     <p>
       <strong>Total Time Driven:</strong>
       {{ daylog.total_hours_and_minutes.0 }}h {{ daylog.total_hours_and_minutes.1 }}m
@@ -17,7 +17,7 @@
     {% else %}
     <p class="text-success mb-0">Within Daily Driving Limit</p>
     {% endif %}
-  </div>
+  </section>
 
   <div class="d-flex justify-content-between align-items-center mt-4">
     <h3>Trips Logged</h3>
@@ -48,7 +48,7 @@
         </button>
       </div>
 
-      <div class="modal fade" id="confirmDeleteTripModal{{ trip.id }}" tabindex="-1"
+      <div class="modal fade" id="confirmDeleteTripModal{{ trip.id }}" tabindex="-1" role="dialog" aria-modal="true"
         aria-labelledby="confirmDeleteTripLabel{{ trip.id }}" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -82,18 +82,16 @@
   {% endif %}
 
 
-  <div>
-    {% if user_settings %}
-    <div class="alert alert-light text-center border border-primary mb-4">
-      <h3 class="mb-2">Your Driving Limits</h3>
-      <p class="mb-1">
-        <strong>Daily Limit:</strong> {{ user_settings.daily_hours }}h {{ user_settings.daily_minutes_only }}m<br>
-        <strong>Trip Limit:</strong> {{ user_settings.trip_hours }}h {{ user_settings.trip_minutes_only }}m
-      </p>
-      <a href="{% url 'settings' %}" class="btn btn-sm btn-outline-primary mt-2">Edit Limits</a>
-    </div>
-    {% endif %}
-  </div>
+  {% if user_settings %}
+  <section class="alert alert-light text-center border border-primary mb-4">
+    <h3 class="mb-2">Your Driving Limits</h3>
+    <p class="mb-1">
+      <strong>Daily Limit:</strong> {{ user_settings.daily_hours }}h {{ user_settings.daily_minutes_only }}m<br>
+      <strong>Trip Limit:</strong> {{ user_settings.trip_hours }}h {{ user_settings.trip_minutes_only }}m
+    </p>
+    <a href="{% url 'settings' %}" class="btn btn-sm btn-outline-primary mt-2">Edit Limits</a>
+  </section>
+  {% endif %}
 
   <div class="d-flex justify-content-center mt-5">
     <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Back to Dashboard</a>
