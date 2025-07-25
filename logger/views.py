@@ -201,7 +201,7 @@ def day_summary(request, daylog_id):
 
     return render(request, 'logger/day_summary.html', {
         'daylog': daylog,
-        'trips': daylog.trips.all(),
+        'trips': daylog.trips.order_by('trip_start_time'),
         'user_settings': user_settings,
     })
 
