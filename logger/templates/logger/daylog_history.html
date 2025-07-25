@@ -19,7 +19,6 @@
             </div>
             <div class="d-flex gap-2">
                 <a href="{% url 'day_summary' log.id %}" class="btn btn-sm btn-outline-primary">View</a>
-                <a href="{% url 'edit_daylog' log.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
                 <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
                     data-bs-target="#deleteDaylogModal{{ log.id }}">
                     Delete
