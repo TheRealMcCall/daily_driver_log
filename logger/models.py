@@ -49,11 +49,13 @@ class DayLog(models.Model):
         remaining = max_daily_minutes - self.total_minutes_driven()
         return max(0, remaining)
 
-    def hours_and_minutes_remaining(self, max_daily_minutes=600):
+    def hours_and_minutes_remaining(self,):
         """
         Return remaining time in (hours, minutes) tuple.
         """
-        remaining = self.minutes_remaining(max_daily_minutes)
+        user_settings = getattr(self.user, 'usersettings', None)
+        max_minutes = user_settings.max_daily_minutes if user_settings else 600
+        remaining = self.minutes_remaining(max_minutes)
         hours = remaining // 60
         minutes = remaining % 60
         return hours, minutes
