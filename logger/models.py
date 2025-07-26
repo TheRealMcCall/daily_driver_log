@@ -49,7 +49,7 @@ class DayLog(models.Model):
         remaining = max_daily_minutes - self.total_minutes_driven()
         return max(0, remaining)
 
-    def hours_and_minutes_remaining(self,):
+    def hours_and_minutes_remaining(self):
         """
         Return remaining time in (hours, minutes) tuple.
         """
@@ -133,13 +133,16 @@ class Trip(models.Model):
 
         check_end_time = trip_end_time
 
-        for other_trip in self.day_log.trips.exclude(pk=self.pk):
+        for other_trip in Trip.objects.filter(
+            day_log__user=self.day_log.user
+        ).exclude(pk=self.pk):
+
             other_start = datetime.combine(
-                self.day_log.start_date,
+                other_trip.day_log.start_date,
                 other_trip.trip_start_time
             )
             other_end = datetime.combine(
-                self.day_log.start_date,
+                other_trip.day_log.start_date,
                 other_trip.trip_finish_time
             )
 
