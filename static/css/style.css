@@ -31,14 +31,14 @@ h3 {
 /* Navbar brand font and link styling */
 .navbar .navbar-brand,
 .navbar .nav-link {
-    color: white !important;
+    color: #2a2a72 !important;
     font-weight: 600;
     transition: 0.3s;
 }
 
 /* Hover Over styling for navbar */
 .navbar .nav-link:hover {
-    color: #2a2a72 !important;
+    color: white !important;
     text-decoration: underline;
 }
 
@@ -88,7 +88,7 @@ h3 {
 /* Footer styling */
 footer {
     background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-    color: white;
+    color: #2a2a72 !important;
 }
 
 /* Button styling */
