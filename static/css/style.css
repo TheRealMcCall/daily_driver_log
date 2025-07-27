@@ -115,3 +115,39 @@ footer {
     flex: 1;
     text-align: center;
 }
+
+/* fixes for accessiblity */
+.text-success {
+    color: #0a5c2c !important;
+}
+
+.alert-light {
+    color: #212529 !important;
+}
+
+.btn-outline-primary,
+.btn-outline-danger {
+    color: #004085 !important;
+    border-color: #004085 !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-danger:hover {
+    background-color: #004085 !important;
+    color: white !important;
+}
+
+.btn-outline-secondary {
+    color: #4a4a4a !important;
+    border-color: #4a4a4a !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #4a4a4a !important;
+    color: white !important;
+}
+
+form.bg-light {
+    background-color: #f0f0f0 !important;
+    color: #212529 !important;
+}

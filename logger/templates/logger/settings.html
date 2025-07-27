@@ -11,6 +11,7 @@
       <div class="col d-flex gap-2 justify-content-center">
         {{ form.max_daily_hours }}
         <span>h</span>
+        <label for="{{ form.max_daily_minutes_only.id_for_label }}" class="visually-hidden">Max Daily Minutes</label>
         {{ form.max_daily_minutes_only }}
         <span>m</span>
       </div>
@@ -21,6 +22,7 @@
       <div class="col d-flex gap-2 justify-content-center">
         {{ form.max_trip_hours }}
         <span>h</span>
+        <label for="{{ form.max_trip_minutes_only.id_for_label }}" class="visually-hidden">Max Trip Minutes</label>
         {{ form.max_trip_minutes_only }}
         <span>m</span>
       </div>
