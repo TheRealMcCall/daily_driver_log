@@ -1,3 +1,6 @@
+const existingTrips = JSON.parse(
+    document.getElementById("existing-trips-data").textContent
+);
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("trip-form");
     const startInput = document.getElementById("id_trip_start_time");

@@ -24,9 +24,10 @@
   </div>
 </div>
 
-<script>
-  const existingDates = JSON.parse('{{ existing_dates_json|escapejs }}');
+<script id="existing-dates-data" type="application/json">
+  {{ existing_dates_json|safe }}
 </script>
+
 <script src="{% static 'js/daylog_form.js' %}" defer></script>
 
 {% endblock %}
