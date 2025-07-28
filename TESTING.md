@@ -129,6 +129,36 @@ Thorough manual testing was done for all critical user interactions across pages
 
 ## User Stories Testing
 
+### Must Have
+
+| User Story                                                                 | Feature or Page           | Test Description                                                                 | Works?             |
+|----------------------------------------------------------------------------|----------------------------|----------------------------------------------------------------------------------|---------------------|
+| As a first-time user, I want to register and log in so I can access my logs. | Authentication (Allauth)  | Registered and logged in using form; redirects to dashboard                     | Works as expected   |
+| As a returning user, I want to log trips with start and finish times.     | Trip Form (Dashboard)     | Trip input saved with start/finish; JS + backend validation used                | Works as expected   |
+| As a user, I want to view today’s trips and see total drive time.         | Dashboard summary + Daily Summary | Trips shown in list with total time updated dynamically                         | Works as expected   |
+| As a user, I want to edit or delete trips in case I make a mistake.       | Trip list (Daily Summary)     | Each trip can be edited and deleted           | Works as expected   |
+| As a user, I want to know if I’ve exceeded my daily or trip time limits.  | Dashboard and daily summary| limits exceeded warnings show on dashboard and daily summary page           | Works as expected   |
+| As a user, I want my data to be private and secure (only visible to me).  | Backend models/views       | Trips are user-linked via ForeignKey; only authenticated user can access them   | Works as expected   |
+| As an admin, I want to view/edit/delete any records from the admin panel. | Django Admin               | Admin tested for access to DayLogs, Trips, and Settings                         | Works as expected   |
+
+### Should Have
+
+| User Story                                                                 | Feature or Page           | Test Description                                                                 | Works?             |
+|----------------------------------------------------------------------------|----------------------------|----------------------------------------------------------------------------------|---------------------|
+| Ability to edit Day Logs                                                  | Dashboard / Not available | This can be done via the history page only                                        | Works as expected     |
+| Visual cues when over driving limits                                    | Dashboard/daily summary alerts| Red text appear showing when limits exceeded (daily or per trip)            | Works as expected   |
+| Input validation: cannot input a trip end time before start unless overnight | Trip form (JS + backend)  | JS blocks invalid times; backend also validates and raises `ValidationError`    | Works as expected   |
+
+### Could Have (Future Development)
+
+| User Story                                                                 | Feature or Page           | Test Description                                                                 | Works?             |
+|----------------------------------------------------------------------------|----------------------------|----------------------------------------------------------------------------------|---------------------|
+| Customizable driving time limits per user *(now implemented)*            | Settings Page             | User can update max trip & daily drive time via a form; new values enforced     | Works as expected   |
+| Weekly/monthly driving summaries                                          | Not implemented           | Could be added using date filtering and aggregation                             | Not implemented     |
+| CSV export of logs                                                        | Not implemented           | Feature not available in current release                                        | Not implemented     |
+| Graphical reports or charts                                               | Not implemented           | No visualisation or charting tools added yet                                   | Not implemented     |
+
+
 ## Validator Testing
 
 ## Bugs
