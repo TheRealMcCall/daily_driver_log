@@ -1,8 +1,46 @@
 # Testing
 ---
-# Contents
+## Contents
+
+* [Browser Compatibility](#browser-compatibility)
+* [Responsiveness](#responsiveness)
+* [Manual Testing](#manual-testing)
+* [User Stories Testing](#user-stories-testing)
+* [Validator Testing](#validator-testing)
+* [Bugs](#bugs)
+---
 
 ## Browser Compatibility
+
+The website was tested on multiple browsers to confirm full compatibility and consistent rendering across platforms.
+
+<details>
+<summary>Click here to view Chrome screenshot - <strong>Working as Excpected</strong></summary>
+
+![Chrome Screenshot](/documentation/compatability/chrome.png)
+
+</details>
+
+<details>
+<summary>Click here to view Firefox screenshot - <strong>Working as Excpected</strong></summary>
+
+![Firefox Screenshot](/documentation/compatability/firefox.png)
+
+</details>
+
+<details>
+<summary>Click here to view Edge screenshot - <strong>Working as Excpected</strong></summary>
+
+![Edge Screenshot](/documentation/compatability/edge.png)
+
+</details>
+
+<details>
+<summary>Click here to view Opera screenshot - <strong>Working as Excpected</strong></summary>
+
+![Opera Screenshot](/documentation/compatability/opera.png)
+
+</details>
 
 ## Responsiveness
 
@@ -95,7 +133,7 @@ Thorough manual testing was done for all critical user interactions across pages
 | Back to dashboard button   | Click      | Redirects user to Dashboard page                       | Works as expected   |
 | Create trip form           | Choose start and finish time | allows user to create a trip         | Works as expected  |
 | Create trip form           | Overnight trip| allows user to have an end time before start time if over night trip | Works as expected  |
-| Create trip form           | Does not allow trips to overlap                                     | Works as expected  |
+| Create trip form           | Form Submit| Does not allow trips to overlap                        | Works as expected  |
 
 ### Settings Page
 
@@ -166,4 +204,4 @@ Thorough manual testing was done for all critical user interactions across pages
 
 ---
 
-* [Back To Top](#Testing)
+* [Back To Top](#testing)
