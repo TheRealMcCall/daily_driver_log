@@ -43,6 +43,67 @@ The website was tested on multiple browsers to confirm full compatibility and co
 </details>
 
 ## Responsiveness
+The site was tested for responsive behaviour across multiple screen sizes and devices. All major content, forms, and controls adjust fluidly across viewport sizes with no layout-breaking issues observed.
+
+**Tested Devices:**
+- Google Pixel 8 Pro (Portrait and Landscape)
+- 24" 1440p Desktop Monitor
+- 24" 1080p Landscape Desktop Monitor
+- 24" 1080p Portrait Desktop Monitor
+- 34" 1440p Ultra-Wide Monitor
+
+In addition to real device testing, Chrome DevTools’ responsive mode was used throughout development to verify breakpoints and content flow.
+
+<details>
+<summary>Click here to view 24" 1440p Desktop Monitor screenshot – <strong>Works as expected</strong></summary>
+
+![1440p Desktop Screenshot](/documentation/responsive/1440p_desktop.png)
+
+</details>
+
+<details>
+<summary>Click here to view 24" 1080p Landscape Desktop Monitor screenshot – <strong>Works as expected</strong></summary>
+
+![1080p Landscape Desktop Screenshot](/documentation/responsive/1080p_desktop.png)
+
+</details>
+
+<details>
+<summary>Click here to view 24" 1080p Portrait Desktop Monitor screenshot – <strong>Works as expected</strong></summary>
+
+![1080p Portrait Desktop Screenshot](/documentation/responsive/1080p_portrait_desktop.png)
+
+</details>
+
+<details>
+<summary>Click here to view 34" 1440p Ultra-Wide Monitor screenshot – <strong>Works as expected</strong></summary>
+
+![Ultra-Wide Screenshot](/documentation/responsive/ultrawide_1440p.png)
+
+</details>
+
+<details>
+<summary>Click here to view Google Pixel 8 Pro (Portrait) screenshot – <strong>Works as expected</strong></summary>
+
+![Pixel 8 Pro Portrait Screenshot](/documentation/responsive/pixel8pro_portrait.png)
+
+</details>
+
+<details>
+<summary>Click here to view Google Pixel 8 Pro (Landscape) screenshot – <strong>Works as expected</strong></summary>
+
+![Pixel 8 Pro Landscape Screenshot](/documentation/responsive/pixel8pro_landscape.png)
+
+</details>
+
+----
+Responsiveness was also demonstrated using short video recordings of real device testing:
+
+- [Google Pixel 8 Pro – Portrait Test](https://drive.google.com/file/d/10eUMt4fQAiNPTXftHLw7Ml7OJQt9P0Wp/view?usp=drive_link)  
+- [Google Pixel 8 Pro – Landscape Test](https://drive.google.com/file/d/1Q2A0s3Khq_xtYin5kUAfGEvWzmfDBPma/view?usp=drive_link)
+
+All navigation menus, forms, buttons, summaries, and tables were confirmed to be usable at small screen widths. The layout adapts seamlessly.
+
 
 ## Manual Testing
 
