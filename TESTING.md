@@ -15,28 +15,28 @@
 The website was tested on multiple browsers to confirm full compatibility and consistent rendering across platforms.
 
 <details>
-<summary>Click here to view Chrome screenshot - <strong>Working as Excpected</strong></summary>
+<summary>Click here to view Chrome screenshot - <strong>Working as Expected</strong></summary>
 
 ![Chrome Screenshot](/documentation/compatability/chrome.png)
 
 </details>
 
 <details>
-<summary>Click here to view Firefox screenshot - <strong>Working as Excpected</strong></summary>
+<summary>Click here to view Firefox screenshot - <strong>Working as Expected</strong></summary>
 
 ![Firefox Screenshot](/documentation/compatability/firefox.png)
 
 </details>
 
 <details>
-<summary>Click here to view Edge screenshot - <strong>Working as Excpected</strong></summary>
+<summary>Click here to view Edge screenshot - <strong>Working as Expected</strong></summary>
 
 ![Edge Screenshot](/documentation/compatability/edge.png)
 
 </details>
 
 <details>
-<summary>Click here to view Opera screenshot - <strong>Working as Excpected</strong></summary>
+<summary>Click here to view Opera screenshot - <strong>Working as Expected</strong></summary>
 
 ![Opera Screenshot](/documentation/compatability/opera.png)
 
