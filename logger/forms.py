@@ -15,15 +15,20 @@ class TripForm(forms.ModelForm):
         model = Trip
         fields = ['trip_start_time', 'trip_finish_time', 'is_overnight']
         widgets = {
-            'trip_start_time': forms.TimeInput(
-                attrs={'type': 'time', 'class': 'form-control'}
-            ),
-            'trip_finish_time': forms.TimeInput(
-                attrs={'type': 'time', 'class': 'form-control'}
-            ),
-            'is_overnight': forms.CheckboxInput(
-                attrs={'class': 'form-check-input'}
-            ),
+            'trip_start_time': forms.TimeInput(attrs={
+                'id': 'trip-start-time',
+                'type': 'time',
+                'class': 'form-control'
+            }),
+            'trip_finish_time': forms.TimeInput(attrs={
+                'id': 'trip-finish-time',
+                'type': 'time',
+                'class': 'form-control'
+            }),
+            'is_overnight': forms.CheckboxInput(attrs={
+                'id': 'is-overnight',
+                'class': 'form-check-input'
+            }),
         }
 
 
@@ -35,9 +40,11 @@ class DayLogForm(forms.ModelForm):
         model = DayLog
         fields = ['start_date']
         widgets = {
-            'start_date': forms.DateInput(
-                attrs={'type': 'date', 'class': 'form-control'}
-            ),
+            'start_date': forms.DateInput(attrs={
+                'id': 'start-date',
+                'type': 'date',
+                'class': 'form-control'
+            }),
         }
 
 

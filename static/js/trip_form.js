@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("trip-form");
-    const startInput = document.getElementById("id_trip_start_time");
-    const endInput = document.getElementById("id_trip_finish_time");
-    const overnightCheckbox = document.getElementById("id_is_overnight");
+    const startInput = document.getElementById("trip-start-time");
+    const endInput = document.getElementById("trip-finish-time");
+    const overnightCheckbox = document.getElementById("is-overnight");
     const errorBox = document.getElementById("js-validation-error");
 
     form.addEventListener("submit", function (event) {

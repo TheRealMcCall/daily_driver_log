@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("daylog-form");
-    const startInput = document.getElementById("id_start_date");
+    const startInput = document.getElementById("start-date");
     const errorBox = document.getElementById("js-validation-error");
 
     form.addEventListener("submit", function (event) {
