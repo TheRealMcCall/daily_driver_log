@@ -41,21 +41,26 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                            <a class="nav-link" href="{% url 'dashboard' %}" aria-label="View dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'daylog_history' %}">History</a>
+                            <a class="nav-link" href="{% url 'daylog_history' %}"
+                                aria-label="View driving log history">History</a>
                         </li>
                     </ul>
+
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'settings' %}">Settings</a>
+                            <a class="nav-link" href="{% url 'settings' %}"
+                                aria-label="Change your driving limit settings">Settings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Logged in as {{ user.username }}</a>
+                            <a class="nav-link disabled" href="#" aria-label="Current user: {{ user.username }}">Logged
+                                in as {{ user.username }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                            <a class="nav-link" href="{% url 'account_logout' %}"
+                                aria-label="Log out of your account">Logout</a>
                         </li>
                     </ul>
 
@@ -84,7 +89,8 @@
             &copy; {{ year|default:"2025" }} Daily Driver Log
         </p>
         <p class="mb-0">
-            Created by <a href="https://github.com/TheRealMcCall/" target="_blank">Luke McCall</a>
+            Created by <a href="https://github.com/TheRealMcCall/" target="_blank"
+                aria-label="Visit Luke McCall's GitHub profile">Luke McCall</a>
         </p>
     </footer>
 

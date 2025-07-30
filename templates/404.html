@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container text-center my-5">
+<div class="container text-center my-5" role="alert">
   <h1 class="display-4">Page Not Found</h1>
   <p class="lead">Sorry, the page you're looking for doesn't exist.</p>
-  <a href="{% url 'home' %}" class="btn btn-primary mt-3">Go to Home</a>
+  <a href="{% url 'home' %}" class="btn btn-primary mt-3" aria-label="Go to homepage">Go to Home</a>
 </div>
 {% endblock %}
