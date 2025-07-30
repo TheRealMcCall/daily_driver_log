@@ -32,12 +32,8 @@
   </div>
 </div>
 
-<script id="existing-trips-data" type="application/json">
-  {
-    {
-      existing_trips_json | safe
-    }
-  }
+<script>
+  const existingTrips = JSON.parse('{{ existing_trips_json|escapejs }}');
 </script>
 
 <script src="{% static 'js/trip_form.js' %}" defer></script>

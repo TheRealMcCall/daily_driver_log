@@ -1,7 +1,3 @@
-const existingDates = JSON.parse(
-    document.getElementById("existing-dates-data").textContent
-);
-
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("daylog-form");
     const startInput = document.getElementById("id_start_date");
