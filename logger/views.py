@@ -233,3 +233,10 @@ def settings_view(request):
     return render(request, 'logger/settings.html', {
         'form': form
     })
+
+
+def custom_404(request, exception):
+    """
+    Custom view to render the 404 error page.
+    """
+    return render(request, '404.html', status=404)
