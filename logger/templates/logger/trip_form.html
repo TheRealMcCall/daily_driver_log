@@ -7,6 +7,12 @@
     <div class="col-12 col-sm-10 col-md-8 col-lg-6">
       <h2 class="text-center mb-4">New Trip for {{ daylog.start_date }}</h2>
 
+      <div class="text-center mb-3">
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-primary btn-sm" aria-label="Go back to dashboard">
+          Back to Dashboard
+        </a>
+      </div>
+
       <form method="post" id="trip-form">
         {% csrf_token %}
 

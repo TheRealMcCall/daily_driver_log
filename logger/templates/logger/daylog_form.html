@@ -7,6 +7,11 @@
   <div class="row justify-content-center ">
     <div class="col-12 col-sm-10 col-md-8 col-lg-6">
       <h2 class="text-center mb-4">Create New Day Log</h2>
+      <div class="text-center mb-3">
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-primary btn-sm" aria-label="Go back to dashboard">
+          Back to Dashboard
+        </a>
+      </div>
       <form method="post" id="daylog-form">
         {% csrf_token %}
         <div id="js-validation-error" class="alert alert-danger d-none" role="alert"></div>
