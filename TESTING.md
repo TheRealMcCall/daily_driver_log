@@ -6,6 +6,7 @@
 * [Responsiveness](#responsiveness)
 * [Manual Testing](#manual-testing)
 * [User Stories Testing](#user-stories-testing)
+* [Lighthouse Testing](#lighthouse-testing)
 * [Validator Testing](#validator-testing)
 * [Bugs](#bugs)
 ---
@@ -259,6 +260,28 @@ All key user stories were implemented and tested. Screenshots demonstrating the 
 | CSV export of logs                                                        | Not implemented           | Feature not available in current release                                        | Not implemented     |
 | Graphical reports or charts                                               | Not implemented           | No visualisation or charting tools added yet                                   | Not implemented     |
 
+## Lighthouse Testing
+
+Pages were tested using [Google Chrome Lighthouse](https://developers.google.com/web/tools/lighthouse) to assess performance, accessibility, best practices, SEO, and PWA readiness.
+
+### Dashboard Page
+
+![Dashboard Lighthouse Report](/documentation/lighthouse/dashboard_lighthouse.png)
+
+### Home Page
+
+![Home Lighthouse Report](/documentation/lighthouse/home_lighthouse.png)
+
+### Daylog Summary Page
+
+![Daylog Summary Report](/documentation/lighthouse/summary_lighthouse.png)
+
+### Settings Page
+
+![Settings Lighthouse Report](/documentation/lighthouse/settings_lighthouse.png)
+
+All scores were consistently high across all categories. Minor accessibility suggestions were already addressed manually, such as ARIA labels and semantic headings.
+
 
 ## Validator Testing
 
@@ -338,6 +361,8 @@ All key templates were tested using the [W3C HTML Validator](https://validator.w
 
 </details>
 
+---
+
 ### CSS Validation
 
 The custom CSS file was tested using the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) and no errors were found.
@@ -348,6 +373,8 @@ The custom CSS file was tested using the [W3C CSS Validation Service](https://ji
 ![CSS Validation Result](/documentation/validators/css_validation.png)
 
 </details>
+
+---
 
 ### JavaScript Validation
 
@@ -376,6 +403,8 @@ Custom JavaScript was tested using [JSHint](https://jshint.com/). The following 
 ![JSHint Validator Result](/documentation/validators/trip_form_jshint.png)
 
 </details>
+
+---
 
 ### Python (PEP8)
 
