@@ -23,6 +23,11 @@
     <div class="mb-3">
       <label for="id_password" class="form-label">Password</label>
       {{ form.password }}
+      {% if form.password.help_text %}
+      <div id="id_password_helptext" class="form-text">
+        {{ form.password.help_text }}
+      </div>
+      {% endif %}
       {{ form.password.errors }}
     </div>
 
