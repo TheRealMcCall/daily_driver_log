@@ -262,6 +262,82 @@ All key user stories were implemented and tested. Screenshots demonstrating the 
 
 ## Validator Testing
 
+### HTML
+
+All key templates were tested using the [W3C HTML Validator](https://validator.w3.org/).
+
+#### Home Page
+<details>
+<summary>Click to view validation result (no Errors)</summary>
+
+![HTML Validator Result](/documentation/validators/home_validation.png)
+
+</details>
+
+#### Dashboard Page
+<details>
+<summary>Click to view validation result (no Errors)</summary>
+
+![HTML Validator Result](/documentation/validators/dashboard_validation.png)
+
+</details>
+
+#### Day Summary Page
+<details>
+<summary>Click to view validation result (no Errors)</summary>
+
+![HTML Validator Result](/documentation/validators/day_summary_validation.png)
+
+</details>
+
+#### History Page
+<details>
+<summary>Click to view validation result (no Errors)</summary>
+
+![HTML Validator Result](/documentation/validators/history_validation.png)
+
+</details>
+
+#### Settings Page
+<details>
+<summary>Click to view validation result (no Errors)</summary>
+
+![HTML Validator Result](/documentation/validators/settings_validation.png)
+
+</details>
+
+#### Daylog Form Page
+<details>
+<summary>Click to view validation result (no Errors)</summary>
+
+![HTML Validator Result](/documentation/validators/daylog_form_validation.png)
+
+</details>
+
+#### Login Page
+<details>
+<summary>Click to view validation result (no Errors)</summary>
+
+![HTML Validator Result](/documentation/validators/login_validation.png)
+
+</details>
+
+#### Logout Page
+<details>
+<summary>Click to view validation result (no Errors)</summary>
+
+![HTML Validator Result](/documentation/validators/logout_validation.png)
+
+</details>
+
+#### 404 Page
+<details>
+<summary>Click to view validation result (no Errors)</summary>
+
+![HTML Validator Result](/documentation/validators/404_validation.png)
+
+</details>
+
 ## Bugs
 
 
