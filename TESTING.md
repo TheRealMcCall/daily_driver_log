@@ -338,6 +338,40 @@ All key templates were tested using the [W3C HTML Validator](https://validator.w
 
 </details>
 
+### CSS Validation
+
+The custom CSS file was tested using the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) and no errors were found.
+
+![CSS Validation Result](/documentation/validators/css_validation.png)
+
+### JavaScript Validation
+
+Custom JavaScript was tested using [JSHint](https://jshint.com/). The following files were validated:
+
+#### Base Javascript
+<details>
+<summary>Click to view validation result - No functional issues (some ES6 warnings)</summary>
+
+![HTML Validator Result](/documentation/validators/base_jshint.png)
+
+</details>
+
+#### Daylog Form Javascript
+<details>
+<summary>Click to view validation result - No functional issues (some ES6 warnings)</summary>
+
+![HTML Validator Result](/documentation/validators/daylog_form_jshint.png)
+
+</details>
+
+#### Trip Form Javascript
+<details>
+<summary>Click to view validation result - No functional issues (some ES6 warnings)</summary>
+
+![HTML Validator Result](/documentation/validators/trip_form_jshint.png)
+
+</details>
+
 ## Bugs
 
 
