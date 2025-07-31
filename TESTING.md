@@ -342,7 +342,12 @@ All key templates were tested using the [W3C HTML Validator](https://validator.w
 
 The custom CSS file was tested using the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) and no errors were found.
 
+<details>
+<summary>Click to view validation result - No issues</summary>
+
 ![CSS Validation Result](/documentation/validators/css_validation.png)
+
+</details>
 
 ### JavaScript Validation
 
@@ -352,7 +357,7 @@ Custom JavaScript was tested using [JSHint](https://jshint.com/). The following 
 <details>
 <summary>Click to view validation result - No functional issues (some ES6 warnings)</summary>
 
-![HTML Validator Result](/documentation/validators/base_jshint.png)
+![JSHint Validator Result](/documentation/validators/base_jshint.png)
 
 </details>
 
@@ -360,7 +365,7 @@ Custom JavaScript was tested using [JSHint](https://jshint.com/). The following 
 <details>
 <summary>Click to view validation result - No functional issues (some ES6 warnings)</summary>
 
-![HTML Validator Result](/documentation/validators/daylog_form_jshint.png)
+![JSHint Validator Result](/documentation/validators/daylog_form_jshint.png)
 
 </details>
 
@@ -368,7 +373,83 @@ Custom JavaScript was tested using [JSHint](https://jshint.com/). The following 
 <details>
 <summary>Click to view validation result - No functional issues (some ES6 warnings)</summary>
 
-![HTML Validator Result](/documentation/validators/trip_form_jshint.png)
+![JSHint Validator Result](/documentation/validators/trip_form_jshint.png)
+
+</details>
+
+### Python (PEP8)
+
+The Python codebase was validated using the [CI Python Linter](https://pep8ci.herokuapp.com/) provided by Code Institute. All files passed without issues. 
+
+#### logger models.py
+<details>
+<summary>Click to view example linter output</summary>
+
+![Linter Validator Result](/documentation/validators/models_linter.png)
+
+</details>
+
+#### logger views.py
+<details>
+<summary>Click to view example linter output</summary>
+
+![Linter Validator Result](/documentation/validators/views_linter.png)
+
+</details>
+
+#### logger urls.py
+<details>
+<summary>Click to view example linter output</summary>
+
+![Linter Validator Result](/documentation/validators/urls_linter.png)
+
+</details>
+
+#### logger forms.py
+<details>
+<summary>Click to view example linter output</summary>
+
+![Linter Validator Result](/documentation/validators/forms_linter.png)
+
+</details>
+
+#### logger apps.py
+<details>
+<summary>Click to view example linter output</summary>
+
+![Linter Validator Result](/documentation/validators/apps_linter.png)
+
+</details>
+
+#### logger admin.py
+<details>
+<summary>Click to view example linter output</summary>
+
+![Linter Validator Result](/documentation/validators/admin_linter.png)
+
+</details>
+
+#### wsgi.py
+<details>
+<summary>Click to view example linter output</summary>
+
+![Linter Validator Result](/documentation/validators/wsgi_linter.png)
+
+</details>
+
+#### urls.py
+<details>
+<summary>Click to view example linter output</summary>
+
+![Linter Validator Result](/documentation/validators/root_urls_linter.png)
+
+</details>
+
+#### asgi.py
+<details>
+<summary>Click to view example linter output</summary>
+
+![Linter Validator Result](/documentation/validators/asgi_linter.png)
 
 </details>
 
