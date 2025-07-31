@@ -484,6 +484,53 @@ The Python codebase was validated using the [CI Python Linter](https://pep8ci.he
 
 ## Bugs
 
+The following bugs were discovered and resolved during development and testing:
+
+---
+
+### Bug: Home page would not render when extending `base.html`
+
+**Issue:**  
+The home page failed to load due to a missing template configuration.
+
+![Template does not exist](/documentation/bugs/template_bug.png)
+
+**Solution:**  
+Added the required template directory configuration to `settings.py`.
+
+![Missing code](/documentation/bugs/template_bug_solution.png)
+
+---
+
+### Bug: "Time Left to Drive" did not reflect user-defined limits
+
+**Issue:**  
+The "Time Left" calculation was using the default limit instead of the user’s custom settings.
+
+![Time left bug](/documentation/bugs/time_left_bug.png)
+
+**Solution:**  
+Updated the logic to reference the correct user-specific settings variable.
+
+![Adjusted Code](/documentation/bugs/time_left_bug_solution.png)
+
+---
+
+### Bug: "Reset to Default" button misaligned on Settings page
+
+**Issue:**  
+The button alignment was inconsistent due to Bootstrap spacing conflicts.
+
+![Alignment bug](/documentation/bugs/alignment_bug.png)
+
+**Solution:**  
+Applied a custom CSS override using `!important` to ensure proper alignment.
+
+![Adjusted Code](/documentation/bugs/alignment_bug_solution.png)
+
+---
+
+**All known bugs have been resolved.** No unresolved issues remain at the time of submission.
 
 ---
 
