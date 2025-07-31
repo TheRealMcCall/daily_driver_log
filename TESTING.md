@@ -11,6 +11,8 @@
 * [Bugs](#bugs)
 ---
 
+Some sections below contain collapsible screenshots and validation outputs — click each summary to expand and view details.
+
 ## Browser Compatibility
 
 The website was tested on multiple browsers to confirm full compatibility and consistent rendering across platforms.
