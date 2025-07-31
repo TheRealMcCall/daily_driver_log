@@ -228,6 +228,8 @@ Thorough manual testing was done for all critical user interactions across pages
 
 ## User Stories Testing
 
+All key user stories were implemented and tested. Screenshots demonstrating the implementation of each user story can be found in the [README User Stories section](/README.md#user-stories).
+
 ### Must Have
 
 | User Story                                                                 | Feature or Page           | Test Description                                                                 | Works?             |
